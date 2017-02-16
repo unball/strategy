@@ -1,1 +1,1 @@
-This repository will contain all of the vision system's code.
+This repository will contain all of the strategy system's code.
