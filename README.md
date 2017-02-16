@@ -1,2 +1,1 @@
-# strategy
-UnBall - IEEE Very Small Size Soccer - Strategy system repository
+This repository will contain all of the vision system's code.
