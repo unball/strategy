@@ -44,18 +44,14 @@ link_directories(
   ${SDFormat_LIBRARY_DIRS}
 )
 
-add_executable(strategy_node
-  src/unball/utils/point.cpp
-  src/unball/utils/math.cpp
-  src/unball/utils/vector.cpp
-  src/strategy/strategy_node.cpp
-  src/strategy/strategy.cpp
-  src/strategy/state_estimator.cpp
-  src/strategy/robot.cpp
-  src/strategy/ball.cpp
-  src/unball/strategy/trajectory_controller.cpp)
-add_dependencies(strategy_node ${catkin_EXPORTED_TARGETS})
-target_link_libraries(strategy_node ${catkin_LIBRARIES})
+add_executable(strategy
+  src/strategy_node.cpp
+  src/strategy.cpp
+  src/state_estimator.cpp
+  src/robot.cpp
+  src/ball.cpp)
+add_dependencies(strategy ${catkin_EXPORTED_TARGETS})
+target_link_libraries(strategy ${catkin_LIBRARIES})
 
 # catkin_install_python(PROGRAMS nodes/communication_node.py
 #                               nodes/fake_strategy_node.py

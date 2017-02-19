@@ -12,7 +12,7 @@
   <url type="website">https://github.com/unball/strategy</url>
 
 
-  <author email="igomesizabella@gmail.com">Izabella Gomes</author> -->
+  <author email="igomesizabella@gmail.com">Izabella Gomes</author>
 
 
   <buildtool_depend>catkin</buildtool_depend>
@@ -20,15 +20,15 @@
   <build_depend>roscpp</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>sensor_msgs</build_depend>
-  <build_depend>opencv2</build_depend>
   <build_depend>message_generation</build_depend>
+  <build_depend>unball</build_depend>
   <build_depend>rospy</build_depend>
 
+
+  <run_depend>rospy</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>sensor_msgs</run_depend>
-  <run_depend>opencv2</run_depend>
   <run_depend>message_runtime</run_depend>
-  <run_depend>rospy</run_depend>
 
 </package>
