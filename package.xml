@@ -1,27 +1,33 @@
 <?xml version="1.0"?>
 <package>
   <name>strategy</name>
-  <version>0.0.1</version>
-  <description>The UnBall Robot Soccer Team strategy package</description>
+  <version>0.0.0</version>
+  <description>TThe UnBall Robot Soccer Team strategy package</description>
 
-  <maintainer email="igomesizabella@gmail.com">Izabella Gomes</maintainer>
-  <maintainer email="mota.icaro@gmail.com">Ícaro Mota</maintainer>
+  <maintainer email="igomesizabella@gmail.com">Izabella Thais Oliveira Gomes</maintainer>
+
 
   <license>MIT</license>
 
   <url type="website">https://github.com/unball/strategy</url>
+
+
+  <author email="igomesizabella@gmail.com">Izabella Gomes</author> -->
+
 
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>roscpp</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>sensor_msgs</build_depend>
+  <build_depend>opencv2</build_depend>
   <build_depend>message_generation</build_depend>
   <build_depend>rospy</build_depend>
 
   <run_depend>roscpp</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>sensor_msgs</run_depend>
+  <run_depend>opencv2</run_depend>
   <run_depend>message_runtime</run_depend>
   <run_depend>rospy</run_depend>
 
