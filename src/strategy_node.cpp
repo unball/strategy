@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     //ros::Subscriber sub2 = n.subscribe("keyboard_topic", 1, receiveKeyboardMessage);
     ros::Publisher publisher = n.advertise<strategy::target_positions_msg>("target_positions_msg", 1);
     
-    initRobotsPoses();
+    //initRobotsPoses();
 
     while (ros::ok())
     {
@@ -63,14 +63,14 @@ int main(int argc, char **argv)
  * For example: if a robot is set to move for 0.20 m, its initial position is (0, 0) and it is spawn at (0.3, 0), the
  * method will calculate a travelled distance of 0.30 m and return, even though its real travelled distance so far is 0!
  */
-void initRobotsPoses()
+/*void initRobotsPoses()
 {
     float x[6] = {0.37, 0.37, 0.60, -0.37, -0.37, -0.60};
     float y[6] = {0.40, -0.40, 0.0, 0.40, -0.40, 0.0};
 
     for (int i = 0; i < 6; ++i)
         robot[i].setPose(x[i], y[i], 0.0); // Initial theta is 0
-}
+}*/
 
 /**
  * Publishes the robots target positions to the strategy topic.
