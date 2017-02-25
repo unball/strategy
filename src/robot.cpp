@@ -10,7 +10,7 @@
  * Implements robots for strategy
  */
 
-#include <unball/strategy/robot.hpp>
+#include <robot.hpp>
 
 /**
  * Robot global object

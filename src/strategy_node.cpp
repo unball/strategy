@@ -1,4 +1,4 @@
-/**
+    /**
  * @file   strategy_node.cpp
  * @author Matheus Vieira Portela
  * @date   21/03/2014
@@ -17,17 +17,18 @@
 
 #include <ros/ros.h>
 
-#include <unball/MeasurementSystemMessage.h>
-#include <unball/KeyboardMessage.h>
-#include <communication/target_positions_msg.h>
-#include <unball/strategy/strategy.hpp> // Strategy strategy;
-#include <unball/strategy/robot.hpp> // Robot robot[6];
-#include <unball/strategy/ball.hpp> // Ball ball;
+#include <strategy/MeasurementSystemMessage.h>
+#include <strategy/KeyboardMessage.h>
+#include <strategy/target_positions_msg.h>
+//#include <strategy.hpp> // Strategy strategy;
+#include <goals.hpp>
+#include <robot.hpp> // Robot robot[6];
+#include <ball.hpp> // Ball ball;
 
 void initRobotsPoses();
 void publishRobotsTargetPositions(ros::Publisher &publisher);
-void receiveMeasurementSystemMessage(const unball::MeasurementSystemMessage::ConstPtr &msg);
-void receiveKeyboardMessage(const unball::KeyboardMessage::ConstPtr &msg);
+void receiveMeasurementSystemMessage(const strategy::MeasurementSystemMessage::ConstPtr &msg);
+//void receiveKeyboardMessage(const strategy::KeyboardMessage::ConstPtr &msg);
 
 int main(int argc, char **argv)
 {
@@ -37,14 +38,14 @@ int main(int argc, char **argv)
     ros::Rate loop_rate(30); // Hz
     
     ros::Subscriber sub = n.subscribe("measurement_system_topic", 1, receiveMeasurementSystemMessage);
-    ros::Subscriber sub2 = n.subscribe("keyboard_topic", 1, receiveKeyboardMessage);
-    ros::Publisher publisher = n.advertise<unball::TargetPositionsMsg>("target_positions_msg", 1);
+    //ros::Subscriber sub2 = n.subscribe("keyboard_topic", 1, receiveKeyboardMessage);
+    ros::Publisher publisher = n.advertise<strategy::target_positions_msg>("target_positions_msg", 1);
     
     initRobotsPoses();
 
     while (ros::ok())
     {
-        strategy.run();
+        //strategy.run();
         publishRobotsTargetPositions(publisher);
         ros::spinOnce();
         loop_rate.sleep();
@@ -77,34 +78,43 @@ void initRobotsPoses()
  */
 void publishRobotsTargetPositions(ros::Publisher &publisher)
 {
-    unball::StrategyMessage msg;
+    strategy:: target_positions_msg msg;
     
-    ROS_DEBUG("Publishing strategy message");
+    ROS_DEBUG("Publishing target_positions_msg message");
     
-    for (int i = 0; i < 6; i++)
-    {
-        msg.x[i] = robot[i].getTargetX();
-        msg.y[i] = robot[i].getTargetY()
+    robot[0].setTargetX(0.5);
+    robot[0].setTargetY(0.5);
 
-        ROS_DEBUG("target_x: %f\t target_y: %f", msg.x[i], y[i]);
+    msg.x[0] = robot[0].getTargetX();
+    msg.y[0] = robot[0].getTargetY();
+
+    for (int i = 1; i < 6; i++)
+    {
+        robot[i].setTargetX(0);
+        robot[i].setTargetY(0);
+
+        msg.x[i] = robot[i].getTargetX();
+        msg.y[i] = robot[i].getTargetY();
+
+        ROS_DEBUG("target_x: %f\t target_y: %f", msg.x[i], msg.y[i]);
     }
     
     publisher.publish(msg);
 }
 
-float getAngularVel(int i) {
+/*float getAngularVel(int i) {
     float K = 1;
     float distance_x = Ball::getInstance().getX() - robot[i].getX();
     float distance_y = Ball::getInstance().getY() - robot[i].getY();
     float angle_to_ball = atan2(distance_y,distance_x);
     return K*(robot[i].getTh() - angle_to_ball);
-}
+}*/
 
 /**
  * Receives the robots locations from the vision topic.
  * @param msg an UnBall vision message pointer.
  */
-void receiveMeasurementSystemMessage(const unball::MeasurementSystemMessage::ConstPtr &msg)
+void receiveMeasurementSystemMessage(const strategy::MeasurementSystemMessage::ConstPtr &msg)
 {
     //ROS_INF)O("\n\n[StrategyNode]:ReceiveMeasuermentSystemMessage - Receiving measurement system message");
     
@@ -136,10 +146,10 @@ void receiveMeasurementSystemMessage(const unball::MeasurementSystemMessage::Con
  * Receives a key from the keyboard topic.
  * @param msg a keyboard message pointer.
  */
-void receiveKeyboardMessage(const unball::KeyboardMessage::ConstPtr &msg)
+/*void receiveKeyboardMessage(const strategy::KeyboardMessage::ConstPtr &msg)
 {
     ROS_ERROR("Received key: %c", msg->key);
     
     Strategy::getInstance().receiveKeyboardInput(msg->key);
     strategy.receiveKeyboardInput(msg->key);
-}
+}*/

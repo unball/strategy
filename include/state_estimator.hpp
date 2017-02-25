@@ -10,16 +10,16 @@
  * A class that estimates the state of the game based on the data given by the camera
  */
 
-#ifndef UNBALL_STATE_ESTIMATOR_H_
-#define UNBALL_STATE_ESTIMATOR_H_
+#ifndef STRATEGY_STATE_ESTIMATOR_H_
+#define STRATEGY_STATE_ESTIMATOR_H_
 
 #include <cmath>
 
 #include <ros/ros.h>
 
-#include <unball/strategy/robot.hpp>
-#include <unball/strategy/ball.hpp>
-#include <unball/utils/math.hpp>
+#include <robot.hpp>
+#include <ball.hpp>
+#include <utils/math.hpp>
 
 namespace WorldState
 {
@@ -65,7 +65,7 @@ class StateEstimator
   	void updateBallState();
     int closestRobotToBall();
     void updateBallPossessionState();
-    void updateScore();
+    //void updateScore();
 
     int score;
     WorldState::GameState game_state_;
@@ -74,4 +74,4 @@ class StateEstimator
     WorldState::BallPossessionState prev_ball_possession_state_;
 };
 
-#endif  // UNBALL_STATE_ESTIMATOR_H_
+#endif  // STRATEGY_STATE_ESTIMATOR_H_

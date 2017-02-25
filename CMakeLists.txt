@@ -17,12 +17,12 @@ add_definitions(-std=c++11)
 
 find_package(Boost REQUIRED COMPONENTS system)
 
-#add_message_files(DIRECTORY msg FILES
-#   KeyboardMessage.msg
-#   MeasurementSystemMessage.msg
-#   target_positions_msg.msg
-#)
-# generate_messages(DEPENDENCIES std_msgs)
+add_message_files(DIRECTORY msg FILES
+   KeyboardMessage.msg
+   MeasurementSystemMessage.msg
+   target_positions_msg.msg
+)
+generate_messages(DEPENDENCIES std_msgs)
 
 catkin_package(
   CATKIN_DEPENDS
@@ -45,14 +45,24 @@ link_directories(
 )
 
 add_executable(strategy
+  src/utils/point.cpp
+  src/utils/math.cpp
+  src/utils/vector.cpp
   src/strategy_node.cpp
-  src/strategy.cpp
-  src/state_estimator.cpp
+  #src/strategy.cpp
+  #src/state_estimator.cpp
+  #src/trajectory_controller.cpp
   src/robot.cpp
-  src/ball.cpp)
+  src/ball.cpp
+  src/goals.cpp
+  #src/players/player.cpp
+  #src/players/assistent_player.cpp
+  #src/players/goalkeeper.cpp
+  #src/players/goalkeeper_kicker.cpp
+  #src/players/initial_goalkeeper.cpp
+  #src/players/kicker_player.cpp
+  #src/players/regular_player.cpp
+  
+  )
 add_dependencies(strategy ${catkin_EXPORTED_TARGETS})
-target_link_libraries(strategy ${catkin_LIBRARIES})
-
-# catkin_install_python(PROGRAMS nodes/communication_node.py
-#                               nodes/fake_strategy_node.py
-#                      DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+target_link_libraries(strategy ${catkin_LIBRARIES}) 

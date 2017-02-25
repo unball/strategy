@@ -11,7 +11,7 @@
  * Implements strategy for robots
  */
 
-#include <unball/strategy/strategy.hpp>
+#include <strategy.hpp>
 
 Strategy strategy;
 
@@ -45,7 +45,7 @@ void Strategy::receiveKeyboardInput(char key)
         	PauseGame();
             break;
         case 'k': case 'K':
-            GoalKick();
+            //GoalKick();
             break;
     }
 }
@@ -82,7 +82,7 @@ void Strategy::run()
     if (state_estimator_.getGameState() != WorldState::GAME_PAUSED)
     {
       state_estimator_.update();
-      updatePlayers();
+      //updatePlayers();
       trajectory_controller_.initialPosition();
       //trajectory_controller_.run();
     }
@@ -96,7 +96,7 @@ void Strategy::run()
 /**
  * REFACTOR: put this inside each player. maybe a method like: player_behaviour shouldChangeTo();
  */
-void Strategy::updatePlayers()
+/*void Strategy::updatePlayers()
 {
     for (int i=0;i<3;i++)
     {
@@ -137,9 +137,9 @@ void Strategy::updatePlayers()
             }
        }
     }
-}
+}*/
 
-bool Strategy::isThere(player_behaviour behaviour)
+/*bool Strategy::isThere(player_behaviour behaviour)
 {
     return find(behaviour) != -1;
 }
@@ -171,4 +171,4 @@ bool Strategy::hasBall(int robot_number)
 
     Vector difference = robot_pos - ball_pos;
     return (fabs(difference.getDirection() - direction) <= M_PI/2);
-}
+}*/

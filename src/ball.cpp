@@ -10,7 +10,7 @@
  * Implements ball methods for strategy
  */
 
-#include <unball/strategy/ball.hpp>
+#include <ball.hpp>
 
 /**
  * Ball instance.

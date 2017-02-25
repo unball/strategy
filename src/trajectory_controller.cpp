@@ -8,17 +8,17 @@
  * @brief Control robots trajectory by applying potential fields.
  */
 
-#include <unball/strategy/trajectory_controller.hpp>
+#include <trajectory_controller.hpp>
 
 TrajectoryController::TrajectoryController()
 {
-    player_[0] = new AssistentPlayer();
+   /* player_[0] = new AssistentPlayer();
     player_[1] = new AssistentPlayer();
     player_[2] = new Goalkeeper();
-    direct_motion_ = true;
+    direct_motion_ = true;*/
 }
 
-TrajectoryController::~TrajectoryController()
+/*TrajectoryController::~TrajectoryController()
 {
     for (int i = 2; i >= 0; --i)
         delete player_[i];
@@ -36,7 +36,7 @@ void TrajectoryController::run()
         player_[i]->clearPotentialFields();
         controlRobot(i, resultant_force);
     }
-}
+}*/
 
 void TrajectoryController::initialPosition()
 {
@@ -50,7 +50,7 @@ void TrajectoryController::initialPosition()
     }
 }
 
-void TrajectoryController::controlRobot(int robot_number, Vector force)
+/*void TrajectoryController::controlRobot(int robot_number, Vector force)
 {
     // Use histeresis to void quickly changing direction.
     float error_margin = 15*M_PI/180;
@@ -96,9 +96,9 @@ void TrajectoryController::move(int robot_number, float distance)
         robot[robot_number].setLinVel(lin_vel);
     // else
     //     robot[robot_number].setLinVel(0);
-}
+}*/
 
-void TrajectoryController::turn(int robot_number, float angle)
+/*void TrajectoryController::turn(int robot_number, float angle)
 {
     const float ANG_KP = 0.008;
     const float ANG_KD = 0;
@@ -109,7 +109,7 @@ void TrajectoryController::turn(int robot_number, float angle)
     angle_error_prev_ = angle_error;
 
     robot[robot_number].setAngVel(ang_vel);
-}
+}*/
 
 void TrajectoryController::stopRobot(int robot_number)
 {
@@ -117,7 +117,7 @@ void TrajectoryController::stopRobot(int robot_number)
     robot[robot_number].setTargetY(0);
 }
 
-void TrajectoryController::updatePlayer(int robot_number, player_behaviour behaviour)
+/*void TrajectoryController::updatePlayer(int robot_number, player_behaviour behaviour)
 {
     delete player_[robot_number];
     
@@ -139,3 +139,4 @@ Player* TrajectoryController::getPlayer(int robot_number)
 {
     return player_[robot_number];
 }
+*/
