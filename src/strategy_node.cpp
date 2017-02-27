@@ -20,7 +20,7 @@
 #include <strategy/MeasurementSystemMessage.h>
 #include <strategy/KeyboardMessage.h>
 #include <strategy/target_positions_msg.h>
-//#include <strategy.hpp> // Strategy strategy;
+#include <strategy.hpp> // Strategy strategy;
 #include <goals.hpp>
 #include <robot.hpp> // Robot robot[6];
 #include <ball.hpp> // Ball ball;
@@ -28,7 +28,7 @@
 //void initRobotsPoses();
 void publishRobotsTargetPositions(ros::Publisher &publisher);
 void receiveMeasurementSystemMessage(const strategy::MeasurementSystemMessage::ConstPtr &msg);
-//void receiveKeyboardMessage(const strategy::KeyboardMessage::ConstPtr &msg);
+void receiveKeyboardMessage(const strategy::KeyboardMessage::ConstPtr &msg);
 
 int main(int argc, char **argv)
 {
@@ -38,15 +38,14 @@ int main(int argc, char **argv)
     ros::Rate loop_rate(30); // Hz
     
     ros::Subscriber sub = n.subscribe("measurement_system_topic", 1, receiveMeasurementSystemMessage);
-    //ros::Subscriber sub2 = n.subscribe("keyboard_topic", 1, receiveKeyboardMessage);
+    ros::Subscriber sub2 = n.subscribe("keyboard_topic", 1, receiveKeyboardMessage);
     ros::Publisher publisher = n.advertise<strategy::target_positions_msg>("target_positions_topic", 1);
     
     //initRobotsPoses();
 
     while (ros::ok())
     {
-        ROS_INFO("[Strategy] Measurement System Message: Receiving");
-        //strategy.run();
+        main_strategy.run();
         publishRobotsTargetPositions(publisher);
         ros::spinOnce();
         loop_rate.sleep();
@@ -81,28 +80,17 @@ void publishRobotsTargetPositions(ros::Publisher &publisher)
 {
     strategy::target_positions_msg msg;
     
-    ROS_INFO("Publishing target_positions_msg message");
-    
-    robot[0].setTargetX(0.5);
-    robot[0].setTargetY(0.5);
-
-    ROS_INFO("Robots: %d x: %f\t y: %f\t\n", 0, robot[0].getTargetX(), robot[0].getTargetX());
-
-    msg.x[0] = robot[0].getTargetX();
-    msg.y[0] = robot[0].getTargetY();
-
-    for (int i = 1; i < 2; i++)
+    for (int i = 0; i < 3; i++)
     {
+        //robot[i].setTargetX(0.5);
+        //robot[i].setTargetY(0.5);
 
-        robot[i].setTargetX(0);
-        robot[i].setTargetY(0);
-
-        ROS_INFO("Robots: %d x: %f\t y: %f\t\n", i, robot[i].getTargetX(), robot[i].getTargetX());
+        //ROS_INFO("Robots: %d x: %f\t y: %f\t\n", i, robot[i].getTargetX(), robot[i].getTargetX());
 
         msg.x[i] = robot[i].getTargetX();
         msg.y[i] = robot[i].getTargetY();
 
-        ROS_DEBUG("target_x: %f\t target_y: %f", msg.x[i], msg.y[i]);
+        //ROS_DEBUG("target_x: %f\t target_y: %f", msg.x[i], msg.y[i]);
     }
     
     publisher.publish(msg);
@@ -122,15 +110,13 @@ void publishRobotsTargetPositions(ros::Publisher &publisher)
  */
 void receiveMeasurementSystemMessage(const strategy::MeasurementSystemMessage::ConstPtr &msg)
 {
-    ROS_INFO("\n\n[StrategyNode]:ReceiveMeasurementSystemMessage - Receiving measurement system message");
+    //ROS_INFO("\n\n[StrategyNode]:ReceiveMeasurementSystemMessage - Receiving measurement system message");
     
     for (int i = 0; i < 6; i++)
     {
-        ROS_INFO("Robots: %d x: %f\t y: %f\t th: %f", i, msg->x[i], msg->y[i], msg->th[i]);
         robot[i].setPose(msg->x[i], msg->y[i], msg->th[i]);
     }
 
-    ROS_INFO("Ball: x: %f, y: %f", msg->ball_x, msg->ball_y);
     if (msg->y[2] < -0.75 or msg->y[2] > 0.75 or msg->x[2] < -0.65 or msg->x[2] > 0.65) 
     {
         //HACK: in case we do not find our goakeeper, we set our goal by:
@@ -152,10 +138,10 @@ void receiveMeasurementSystemMessage(const strategy::MeasurementSystemMessage::C
  * Receives a key from the keyboard topic.
  * @param msg a keyboard message pointer.
  */
-/*void receiveKeyboardMessage(const strategy::KeyboardMessage::ConstPtr &msg)
+void receiveKeyboardMessage(const strategy::KeyboardMessage::ConstPtr &msg)
 {
-    ROS_ERROR("Received key: %c", msg->key);
+    ROS_INFO("Received key: %c", msg->key);
     
     Strategy::getInstance().receiveKeyboardInput(msg->key);
-    strategy.receiveKeyboardInput(msg->key);
-}*/
+    main_strategy.receiveKeyboardInput(msg->key);
+}

@@ -44,14 +44,20 @@ link_directories(
   ${SDFormat_LIBRARY_DIRS}
 )
 
-add_executable(strategy
+add_executable(keyboard_node
+  src/keyboard/keyboard_node.cpp
+  src/keyboard/keyboard_input.cpp)
+add_dependencies(keyboard_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(keyboard_node ${catkin_LIBRARIES})
+
+add_executable(strategy_node
   src/utils/point.cpp
   src/utils/math.cpp
   src/utils/vector.cpp
   src/strategy_node.cpp
-  #src/strategy.cpp
-  #src/state_estimator.cpp
-  #src/trajectory_controller.cpp
+  src/strategy.cpp
+  src/state_estimator.cpp
+  src/trajectory_controller.cpp
   src/robot.cpp
   src/ball.cpp
   src/goals.cpp
@@ -62,7 +68,6 @@ add_executable(strategy
   #src/players/initial_goalkeeper.cpp
   #src/players/kicker_player.cpp
   #src/players/regular_player.cpp
-  
   )
-add_dependencies(strategy ${catkin_EXPORTED_TARGETS})
-target_link_libraries(strategy ${catkin_LIBRARIES}) 
+add_dependencies(strategy_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(strategy_node ${catkin_LIBRARIES}) 

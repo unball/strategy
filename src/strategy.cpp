@@ -13,7 +13,7 @@
 
 #include <strategy.hpp>
 
-Strategy strategy;
+Strategy main_strategy;
 
 /**
  * Strategy instance.
@@ -56,7 +56,7 @@ void Strategy::receiveKeyboardInput(char key)
 */
 void Strategy::PauseGame()
 {
-	ROS_INFO("[Strategy] Keyboard input: Setting game state PAUSED");
+	//ROS_INFO("[Strategy] Keyboard input: Setting game state PAUSED");
 	state_estimator_.setGameState(WorldState::GAME_PAUSED);
 
 	for (int i=0;i<3;i++)
@@ -65,7 +65,7 @@ void Strategy::PauseGame()
 
 void Strategy::ResumeGame()
 {
-	ROS_INFO("[Strategy] Keyboard input: Setting game state RUNNING");
+	//ROS_INFO("[Strategy] Keyboard input: Setting game state RUNNING");
 	state_estimator_.setGameState(WorldState::GAME_RUNNING);
 }
 
@@ -79,8 +79,10 @@ void Strategy::ResumeGame()
  */
 void Strategy::run()
 {
+    //ROS_INFO("\nSTRATEGY::run\n");
     if (state_estimator_.getGameState() != WorldState::GAME_PAUSED)
     {
+      //ROS_INFO("\nGAME_RUNNING\n");
       state_estimator_.update();
       //updatePlayers();
       trajectory_controller_.initialPosition();
@@ -88,6 +90,7 @@ void Strategy::run()
     }
     else
     {
+      //ROS_INFO("\nGAME_PAUSED\n");
       for (int i=0;i<3;i++)
         trajectory_controller_.stopRobot(i);
     }

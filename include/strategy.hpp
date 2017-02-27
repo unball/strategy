@@ -57,6 +57,6 @@ class Strategy
     //bool hasBall(int robot_number);
 };
 
-extern Strategy strategy;
+extern Strategy main_strategy;
 
 #endif  // STRATEGY_STRATEGY_H_
