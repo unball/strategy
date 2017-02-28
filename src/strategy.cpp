@@ -79,14 +79,11 @@ void Strategy::ResumeGame()
  */
 void Strategy::run()
 {
-    //ROS_INFO("\nSTRATEGY::run\n");
     if (state_estimator_.getGameState() != WorldState::GAME_PAUSED)
     {
-      //ROS_INFO("\nGAME_RUNNING\n");
-      state_estimator_.update();
+      //state_estimator_.update();
       //updatePlayers();
       trajectory_controller_.initialPosition();
-      //trajectory_controller_.run();
     }
     else
     {

@@ -1,0 +1,422 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"GAME",
+				"GAME_RUNNING"
+			],
+			[
+				"strategy_",
+				"strategy_frame"
+			],
+			[
+				"Re",
+				"Receiving"
+			],
+			[
+				"targ",
+				"target_positions_msg"
+			],
+			[
+				"tar",
+				"target_positions_msg"
+			],
+			[
+				"p",
+				"player"
+			],
+			[
+				"PLA",
+				"player"
+			],
+			[
+				"str",
+				"strategy"
+			],
+			[
+				"co",
+				"communication"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"a",
+				"actual_position_y"
+			],
+			[
+				"ac",
+				"actual_position_x"
+			],
+			[
+				"T",
+				"TrajectoryController"
+			],
+			[
+				"ta",
+				"target_x_"
+			],
+			[
+				"targe",
+				"target_y"
+			],
+			[
+				"unb",
+				"unball"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/iza/strategy/src/strategy.cpp",
+			"settings":
+			{
+				"buffer_size": 4649,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/iza/strategy/src/strategy_node.cpp",
+			"settings":
+			{
+				"buffer_size": 4798,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/iza/strategy/include/strategy.hpp",
+			"settings":
+			{
+				"buffer_size": 1194,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/iza/strategy",
+		"/home/iza/strategy/include",
+		"/home/iza/strategy/src"
+	],
+	"file_history":
+	[
+		"/home/iza/catkin_ws/src/strategy/src/strategy.cpp",
+		"/home/iza/strategy/src/trajectory_controller.cpp",
+		"/home/iza/strategy/src/strategy.cpp",
+		"/home/iza/strategy/src/robot.cpp",
+		"/home/iza/strategy/src/state_estimator.cpp",
+		"/home/iza/strategy/src/ball.cpp",
+		"/home/iza/strategy/src/strategy_node.cpp",
+		"/home/iza/strategy/src/keyboard/keyboard_input.cpp",
+		"/home/iza/strategy/src/keyboard/keyboard_node.cpp",
+		"/home/iza/strategy/CMakeLists.txt",
+		"/home/iza/strategy/include/keyboard/keyboard_input.hpp",
+		"/home/iza/strategy/include/strategy.hpp",
+		"/home/iza/ieee-very-small/software/src/unball/keyboard/keyboard_node.cpp",
+		"/home/iza/strategy/package.xml",
+		"/home/iza/Documents/how to run the strategy with the simulator",
+		"/home/iza/strategy/include/trajectory_controller.hpp",
+		"/home/iza/strategy/include/robot.hpp",
+		"/home/iza/trash_strategy/strategy_src/strategy_node.cpp",
+		"/home/iza/catkin_ws/src/ieee-very-small/software/src/unball/keyboard/keyboard_node.cpp",
+		"/home/iza/catkin_ws/src/ieee-very-small/software/src/unball/keyboard/keyboard_input.cpp",
+		"/home/iza/strategy/include/goals.hpp",
+		"/home/iza/strategy/include/state_estimator.hpp",
+		"/home/iza/strategy/src/goals.cpp",
+		"/home/iza/strategy/include/players/player.hpp",
+		"/home/iza/strategy/include/players/regular_player.hpp",
+		"/home/iza/strategy/src/players/player.cpp",
+		"/home/iza/strategy/src/players/regular_player.cpp",
+		"/home/iza/catkin_ws/src/ieee-very-small/software/src/unball/strategy/trajectory_controller.cpp",
+		"/home/iza/strategy/include/players/assistent_player.hpp",
+		"/home/iza/strategy/src/players/assistent_player.cpp",
+		"/home/iza/strategy/include/assistent_player.hpp",
+		"/home/iza/strategy/src/players/kicker_player.cpp",
+		"/home/iza/strategy/include/players/kicker_player.hpp",
+		"/home/iza/strategy/include/players/initial_goalkeeper.hpp",
+		"/home/iza/strategy/src/players/initial_goalkeeper.cpp",
+		"/home/iza/strategy/include/players/goalkeeper_kicker.hpp",
+		"/home/iza/strategy/src/players/goalkeeper_kicker.cpp",
+		"/home/iza/strategy/src/players/goalkeeper.cpp",
+		"/home/iza/strategy/include/players/goalkeeper.hpp",
+		"/home/iza/strategy/src/assistent_player.cpp",
+		"/home/iza/strategy/include/utils/math.hpp",
+		"/home/iza/strategy/include/player.hpp",
+		"/home/iza/strategy/src/player.cpp",
+		"/home/iza/strategy/include/ball.hpp",
+		"/home/iza/strategy/src/utils/vector.cpp",
+		"/home/iza/strategy/src/utils/point.cpp",
+		"/home/iza/catkin_ws/src/strategy/src/utils/math.cpp",
+		"/home/iza/catkin_ws/src/strategy/package.xml",
+		"/home/iza/catkin_ws/src/strategy/CMakeLists.txt",
+		"/home/iza/catkin_ws/src/ieee-very-small/software/src/unball/strategy/strategy_node.cpp",
+		"/home/iza/catkin_ws/src/ieee-very-small/software/src/unball/strategy/player.cpp",
+		"/home/iza/catkin_ws/src/ieee-very-small/software/src/unball/measurement_system/measurement_system_node.cpp",
+		"/home/iza/catkin_ws/src/strategy/src/ball.cpp",
+		"/home/iza/catkin_ws/src/strategy/include/ball.hpp",
+		"/home/iza/catkin_ws/src/strategy/src/robot.cpp",
+		"/home/iza/catkin_ws/src/strategy/ball.cpp",
+		"/home/iza/catkin_ws/src/ieee-very-small/software/src/unball/strategy/ball.cpp"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"receive",
+			"recei",
+			"major",
+			"_strategy",
+			"major",
+			"_strategy",
+			"Major",
+			"robot",
+			"array",
+			"strategy",
+			"isThere",
+			"build",
+			"set"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/iza/strategy/src/strategy.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4649,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 945.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/iza/strategy/src/strategy_node.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4798,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/iza/strategy/include/strategy.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1194,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 450.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "keyboard_input.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 217.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
