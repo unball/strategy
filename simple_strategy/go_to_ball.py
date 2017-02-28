@@ -48,7 +48,8 @@ def callback(data):
 
         target = [ball_x - allies_x[robot], ball_y - allies_y[robot]]
         target = convert_axis_to_robot(target, math.radians(allies_th[robot]))
-        target_vector.append(normalize_vector(target))
+        target_vector.append(target)
+        #target_vector.append(normalize_vector(target))
 
         msg.x[robot] = target_vector[robot][0]
         msg.y[robot] = target_vector[robot][1]
