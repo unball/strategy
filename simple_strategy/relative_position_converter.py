@@ -7,18 +7,15 @@ from subprocess import call
 
 number_of_robots = 3
 
-allies_x = []
-allies_y = []
-allies_th = []
+allies_x = [0, 0, 0]
+allies_y = [0, 0, 0]
+allies_th = [0, 0, 0]
 
 def receiveGlobalPositions(data):
-    del allies_x[:]
-    del allies_y[:]
-    del allies_th[:]
     for robot in range(number_of_robots):
-        allies_x.append(data.x[robot])
-        allies_y.append(data.y[robot])
-        allies_th.append(data.th[robot])
+        allies_x[robot] = data.x[robot]
+        allies_y[robot] = data.y[robot]
+        allies_th[robot] = data.th[robot]
 
 def convertTargetPositions(global_target):
     msg = target_positions_msg()
