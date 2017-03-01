@@ -18,11 +18,11 @@ GoalkeeperKicker::GoalkeeperKicker()
 	behaviour_ = GOALKEEPER_KICKER;
 }
 
-/*void GoalkeeperKicker::buildPotentialFields(int robot_number)
+void GoalkeeperKicker::buildPotentialFields(int robot_number)
 {
     updateBallPos();
     potential_fields_.push_back(new AttractivePotentialField(ball_pos_, 20));
-}*/
+}
 
 void GoalkeeperKicker::updateBallPos()
 {

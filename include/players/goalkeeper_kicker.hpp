@@ -17,7 +17,7 @@ class GoalkeeperKicker : public Player
 {
   public:
   	GoalkeeperKicker();
-  	//void buildPotentialFields(int robot_number);
+  	void buildPotentialFields(int robot_number);
   private:
   	void updateBallPos();
 

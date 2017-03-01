@@ -9,7 +9,7 @@
  */
 
 #ifndef STRATEGY_PLAYER_H_
-#define SRATEGY_PLAYER_H_
+#define STRATEGY_PLAYER_H_
 
 #include <memory>
 
@@ -18,13 +18,13 @@
 #include <ball.hpp>
 #include <robot.hpp>
 #include <goals.hpp>
-/*#include <attractive_potential_field.hpp>
-#include <parallel_potential_field.hpp>
-#include <perpendicular_potential_field.hpp>
-#include <repulsive_potential_field.hpp>
-#include <selective_potential_field.hpp>
-#include <tangential_potential_field.hpp>
-*/
+#include <potential_fields/attractive_potential_field.hpp>
+#include <potential_fields/parallel_potential_field.hpp>
+#include <potential_fields/perpendicular_potential_field.hpp>
+#include <potential_fields/repulsive_potential_field.hpp>
+#include <potential_fields/selective_potential_field.hpp>
+#include <potential_fields/tangential_potential_field.hpp>
+
 enum player_behaviour
 {
     INITIAL_GOALKEEPER,
@@ -38,14 +38,14 @@ enum player_behaviour
 class Player
 {
   public:
-  	//~Player();
-  	//virtual void buildPotentialFields(int robot_number) = 0;
-  	//void clearPotentialFields();
-  	//Vector calculateResultantForce(int robot_number);
+  	~Player();
+  	virtual void buildPotentialFields(int robot_number) = 0;
+  	void clearPotentialFields();
+  	Vector calculateResultantForce(int robot_number);
 
   	player_behaviour getBehaviour();
   protected:
-  	//std::vector<PotentialField*> potential_fields_;
+  	std::vector<PotentialField*> potential_fields_;
 
   	player_behaviour behaviour_;
 };

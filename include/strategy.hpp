@@ -46,15 +46,15 @@ class Strategy
 
     void PauseGame();
     void ResumeGame();
-    //void GoalKick();
+    void GoalKick();
 
-    //void updatePlayers();
+    void updatePlayers();
 
-    //void setKickerForAssistent(int assistent);
+    void setKickerForAssistent(int assistent);
 
-    //bool isThere(player_behaviour behaviour);
-    //int find(player_behaviour behaviour);
-    //bool hasBall(int robot_number);
+    bool isThere(player_behaviour behaviour);
+    int find(player_behaviour behaviour);
+    bool hasBall(int robot_number);
 };
 
 extern Strategy main_strategy;

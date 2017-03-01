@@ -47,7 +47,7 @@ float Robot::getTh()
     return th_;
 }
 
-float Robot::getLinVel()
+/*float Robot::getLinVel()
 {
     return lin_vel_;
 }
@@ -55,7 +55,7 @@ float Robot::getLinVel()
 float Robot::getAngVel()
 {
     return ang_vel_;
-}
+}*/
 
 float Robot::getTargetX()
 {
@@ -97,21 +97,21 @@ void Robot::setPose(float x, float y, float th)
  * Set linear velocity, saturated at the ROBOT_SATURATION_LIN_VEL level (arbitrary value).
  * @param lin_vel Desired linear velocity level.
  */
-void Robot::setLinVel(float lin_vel)
+/*void Robot::setLinVel(float lin_vel)
 {
     lin_vel = math::saturate(lin_vel, ROBOT_SATURATION_LIN_VEL);
     lin_vel_ = lin_vel;
-}
+}*/
 
 /**
  * Set angular velocity, saturated at the ROBOT_SATURATION_ANG_VEL level (arbitrary value).
  * @param ang_vel Desired angular velocity level.
  */
-void Robot::setAngVel(float ang_vel)
+/*void Robot::setAngVel(float ang_vel)
 {
     ang_vel = math::saturate(ang_vel, ROBOT_SATURATION_ANG_VEL);
     ang_vel_ = ang_vel;
-}
+}*/
 
 void Robot::setTargetX(float target_x)
 {

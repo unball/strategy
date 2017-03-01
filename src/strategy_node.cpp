@@ -90,7 +90,7 @@ void publishRobotsTargetPositions(ros::Publisher &publisher)
         msg.x[i] = robot[i].getTargetX();
         msg.y[i] = robot[i].getTargetY();
 
-        //ROS_DEBUG("target_x: %f\t target_y: %f", msg.x[i], msg.y[i]);
+        //ROS_INFO("target_x: %f\t target_y: %f", msg.x[i], msg.y[i]);
     }
     
     publisher.publish(msg);

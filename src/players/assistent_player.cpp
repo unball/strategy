@@ -24,7 +24,7 @@ AssistentPlayer::AssistentPlayer(int friendly_kicker)
 	friendly_kicker_ = friendly_kicker;
 }
 
-/*void AssistentPlayer::buildPotentialFields(int robot_number)
+void AssistentPlayer::buildPotentialFields(int robot_number)
 {
     Vector ball_position(Vector(Ball::getInstance().getX(), Ball::getInstance().getY()));
     Vector difference;
@@ -42,7 +42,7 @@ AssistentPlayer::AssistentPlayer(int friendly_kicker)
     }
 
     avoidTheWalls(robot_number);
-}*/
+}
 
 bool AssistentPlayer::isInBallRange(int robot_number)
 {
@@ -58,7 +58,7 @@ void AssistentPlayer::findTarget()
     kick_target_ = Vector(0,0) - Goals::getInstance().opponent_goal_;
 }
 
-/*void AssistentPlayer::avoidTheWalls(int robot_number)
+void AssistentPlayer::avoidTheWalls(int robot_number)
 {
     if (robot[robot_number].getX() > 0.55)
         potential_fields_.push_back(new ParallelPotentialField(Vector(robot[robot_number].getY(), robot[robot_number].getX()),
@@ -72,4 +72,4 @@ void AssistentPlayer::findTarget()
     else if (robot[robot_number].getY() < -0.65)
         potential_fields_.push_back(new ParallelPotentialField(Vector(robot[robot_number].getY(), robot[robot_number].getX()),
         Vector(-0.75, robot[robot_number].getX()), 0.2));
-}*/
+}

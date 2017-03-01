@@ -18,7 +18,7 @@ class KickerPlayer : public Player
 {
   public:
   	KickerPlayer();
-  	//void buildPotentialFields(int robot_number);
+  	void buildPotentialFields(int robot_number);
 
   private:
   	void findTarget();
@@ -27,7 +27,7 @@ class KickerPlayer : public Player
 
   	bool isInBallRange(int robot_number);
   	bool opponentGoalkeeperIsInGoalRange(int opponent_goalkeeper);
-    //void avoidTheWalls(int robot_number);
+    void avoidTheWalls(int robot_number);
 
   	float target_;
   	Vector kick_target_;

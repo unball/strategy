@@ -18,7 +18,7 @@ RegularPlayer::RegularPlayer()
     behaviour_ = REGULAR_PLAYER;
 }
 
-/*void RegularPlayer::buildPotentialFields(int robot_number)
+void RegularPlayer::buildPotentialFields(int robot_number)
 {
     Vector ball_position(Vector(Ball::getInstance().getX(), Ball::getInstance().getY()));
 
@@ -35,7 +35,7 @@ RegularPlayer::RegularPlayer()
         }
     }
     avoidTheWalls(robot_number);
-}*/
+}
 
 bool RegularPlayer::isInBallRange(int robot_number)
 {
@@ -46,7 +46,7 @@ bool RegularPlayer::isInBallRange(int robot_number)
     return difference.getMagnitude() < BALL_RANGE_;
 }
 
-/*void RegularPlayer::avoidTheWalls(int robot_number)
+void RegularPlayer::avoidTheWalls(int robot_number)
 {
     if (robot[robot_number].getY() > 0.55)
         potential_fields_.push_back(new ParallelPotentialField(Vector(robot[robot_number].getX(), robot[robot_number].getY()),
@@ -61,4 +61,3 @@ bool RegularPlayer::isInBallRange(int robot_number)
         potential_fields_.push_back(new ParallelPotentialField(Vector(robot[robot_number].getX(), robot[robot_number].getY()),
         Vector(-0.75, robot[robot_number].getY()), 0.2));
 }
-*/

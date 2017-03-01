@@ -18,7 +18,7 @@ class Goalkeeper : public Player
 {
   public:
   	Goalkeeper();
-  	//void buildPotentialFields(int robot_number);
+  	void buildPotentialFields(int robot_number);
   private:
   	void stayAtTheBoundary();
   	bool isBallInRange();

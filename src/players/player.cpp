@@ -10,7 +10,7 @@
 
 #include <players/player.hpp>
 
-/*Player::~Player()
+Player::~Player()
 {
 	clearPotentialFields();
 }
@@ -31,7 +31,7 @@ Vector Player::calculateResultantForce(int robot_number)
         resultant_force += potential_fields_[i]->calculateForce(position);
 
     return resultant_force;	
-}*/
+}
 
 player_behaviour Player::getBehaviour()
 {

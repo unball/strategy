@@ -12,19 +12,19 @@
 
 TrajectoryController::TrajectoryController()
 {
-   /* player_[0] = new AssistentPlayer();
+    player_[0] = new AssistentPlayer();
     player_[1] = new AssistentPlayer();
     player_[2] = new Goalkeeper();
-    direct_motion_ = true;*/
+    direct_motion_ = true;
 }
 
-/*TrajectoryController::~TrajectoryController()
+TrajectoryController::~TrajectoryController()
 {
     for (int i = 2; i >= 0; --i)
         delete player_[i];
 }
 
-void TrajectoryController::run()
+/*void TrajectoryController::run()
 {
     Vector resultant_force;
     for (int i=0;i<3;i++)
@@ -47,7 +47,21 @@ void TrajectoryController::initialPosition()
     {
         robot[i].setTargetX(target_position_x[i]-robot[i].getX());
         robot[i].setTargetY(target_position_y[i]-robot[i].getY());
+        convertAxisToRobot(i);
     }
+}
+
+void TrajectoryController::convertAxisToRobot(int robot_number)
+{
+    float x = robot[robot_number].getTargetX();
+    float y = robot[robot_number].getTargetY();
+
+    robot[robot_number].setTargetX(x*cos(-robot[robot_number].getTh())
+                                - y*sin(-robot[robot_number].getTh()));
+    robot[robot_number].setTargetY(x*sin(-robot[robot_number].getTh())
+                                + y*cos(-robot[robot_number].getTh()));
+    ROS_INFO("TrajectoryController::convertAxisToRobot");
+    ROS_INFO("robot[%d]: x = %f, y = %f", robot_number, robot[robot_number].getTargetX(),robot[robot_number].getTargetY());
 }
 
 /*void TrajectoryController::controlRobot(int robot_number, Vector force)
@@ -117,7 +131,7 @@ void TrajectoryController::stopRobot(int robot_number)
     robot[robot_number].setTargetY(0);
 }
 
-/*void TrajectoryController::updatePlayer(int robot_number, player_behaviour behaviour)
+void TrajectoryController::updatePlayer(int robot_number, player_behaviour behaviour)
 {
     delete player_[robot_number];
     
@@ -139,4 +153,3 @@ Player* TrajectoryController::getPlayer(int robot_number)
 {
     return player_[robot_number];
 }
-*/

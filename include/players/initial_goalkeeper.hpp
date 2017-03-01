@@ -18,7 +18,7 @@ class InitialGoalkeeper : public Player
 {
   public:
   	InitialGoalkeeper();
-  	//void buildPotentialFields(int robot_number);
+  	void buildPotentialFields(int robot_number);
   private:
   	static float const OFFSET;
 };

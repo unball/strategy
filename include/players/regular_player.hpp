@@ -18,11 +18,11 @@ class RegularPlayer : public Player
 {
   public:
   	RegularPlayer();
-  	//void buildPotentialFields(int robot_number);
+  	void buildPotentialFields(int robot_number);
   	bool isInBallRange(int robot_number);
 
   private:
-  	//void avoidTheWalls(int robot_number);
+  	void avoidTheWalls(int robot_number);
 
   	static float const BALL_RANGE_;
 };

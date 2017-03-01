@@ -69,10 +69,10 @@ void Strategy::ResumeGame()
 	state_estimator_.setGameState(WorldState::GAME_RUNNING);
 }
 
-/*void Strategy::GoalKick()
+void Strategy::GoalKick()
 {
     trajectory_controller_.updatePlayer(2,GOALKEEPER_KICKER);
-}*/
+}
 
 /**
  * Run strategy methods that should be called each strategy iteration.
@@ -81,9 +81,9 @@ void Strategy::run()
 {
     if (state_estimator_.getGameState() != WorldState::GAME_PAUSED)
     {
-      //state_estimator_.update();
-      //updatePlayers();
-      trajectory_controller_.initialPosition();
+      state_estimator_.update();
+      updatePlayers();
+      //trajectory_controller_.run();
     }
     else
     {
@@ -96,9 +96,9 @@ void Strategy::run()
 /**
  * REFACTOR: put this inside each player. maybe a method like: player_behaviour shouldChangeTo();
  */
-/*void Strategy::updatePlayers()
+void Strategy::updatePlayers()
 {
-    for (int i=0;i<3;i++)
+    for (int i = 0; i < 3; i++)
     {
        if (trajectory_controller_.getPlayer(i)->getBehaviour() == INITIAL_GOALKEEPER)
        {
@@ -119,15 +119,13 @@ void Strategy::run()
        }
        else if (trajectory_controller_.getPlayer(i)->getBehaviour() == KICKER_PLAYER)
        {
-             if (not hasBall(i))
+            if (not hasBall(i))
                  trajectory_controller_.updatePlayer(i,ASSISTENT_PLAYER);
        }
        else if (trajectory_controller_.getPlayer(i)->getBehaviour() == ASSISTENT_PLAYER)
        {
             if (isThere(KICKER_PLAYER))
-            {
                 setKickerForAssistent(i);
-            }
             else
             {
                 if (hasBall(i))
@@ -137,9 +135,9 @@ void Strategy::run()
             }
        }
     }
-}*/
+}
 
-/*bool Strategy::isThere(player_behaviour behaviour)
+bool Strategy::isThere(player_behaviour behaviour)
 {
     return find(behaviour) != -1;
 }
@@ -171,4 +169,4 @@ bool Strategy::hasBall(int robot_number)
 
     Vector difference = robot_pos - ball_pos;
     return (fabs(difference.getDirection() - direction) <= M_PI/2);
-}*/
+}

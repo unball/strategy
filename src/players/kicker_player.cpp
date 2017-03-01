@@ -18,7 +18,7 @@ KickerPlayer::KickerPlayer()
     behaviour_ = KICKER_PLAYER;
 }
 
-/*void KickerPlayer::buildPotentialFields(int robot_number)
+void KickerPlayer::buildPotentialFields(int robot_number)
 {
     Vector ball_position(Vector(Ball::getInstance().getX(), Ball::getInstance().getY()));
     Vector difference;
@@ -39,7 +39,7 @@ KickerPlayer::KickerPlayer()
 
     //potential_fields_.push_back(new RepulsivePotentialField(Vector(robot[5].getX(), robot[5].getY()), 0.3, 0.9));
     avoidTheWalls(robot_number);
-}*/
+}
 
 void KickerPlayer::findTarget()
 {
@@ -71,7 +71,7 @@ bool KickerPlayer::opponentGoalkeeperIsInGoalRange(int opponent_goalkeeper)
     return (robot[opponent_goalkeeper].getX() > -0.22 and robot[opponent_goalkeeper].getX() < 0.22);
 }
 
-/*void KickerPlayer::avoidTheWalls(int robot_number)
+void KickerPlayer::avoidTheWalls(int robot_number)
 {
     if (robot[robot_number].getX() > 0.55)
         potential_fields_.push_back(new ParallelPotentialField(Vector(robot[robot_number].getY(), robot[robot_number].getX()),
@@ -85,4 +85,4 @@ bool KickerPlayer::opponentGoalkeeperIsInGoalRange(int opponent_goalkeeper)
     else if (robot[robot_number].getY() < -0.65)
         potential_fields_.push_back(new ParallelPotentialField(Vector(robot[robot_number].getY(), robot[robot_number].getX()),
         Vector(-0.75, robot[robot_number].getX()), 0.2));
-}*/
+}

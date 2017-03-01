@@ -54,6 +54,7 @@ add_executable(strategy_node
   src/utils/point.cpp
   src/utils/math.cpp
   src/utils/vector.cpp
+  
   src/strategy_node.cpp
   src/strategy.cpp
   src/state_estimator.cpp
@@ -61,13 +62,21 @@ add_executable(strategy_node
   src/robot.cpp
   src/ball.cpp
   src/goals.cpp
-  #src/players/player.cpp
-  #src/players/assistent_player.cpp
-  #src/players/goalkeeper.cpp
-  #src/players/goalkeeper_kicker.cpp
-  #src/players/initial_goalkeeper.cpp
-  #src/players/kicker_player.cpp
-  #src/players/regular_player.cpp
+  
+  src/players/player.cpp
+  src/players/assistent_player.cpp
+  src/players/goalkeeper.cpp
+  src/players/goalkeeper_kicker.cpp
+  src/players/initial_goalkeeper.cpp
+  src/players/kicker_player.cpp
+  src/players/regular_player.cpp
+
+  src/potential_fields/attractive_potential_field.cpp
+  src/potential_fields/parallel_potential_field.cpp
+  src/potential_fields/perpendicular_potential_field.cpp
+  src/potential_fields/repulsive_potential_field.cpp
+  src/potential_fields/selective_potential_field.cpp
+  src/potential_fields/tangential_potential_field.cpp
   )
 add_dependencies(strategy_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(strategy_node ${catkin_LIBRARIES}) 

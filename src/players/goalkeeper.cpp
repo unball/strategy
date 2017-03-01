@@ -19,7 +19,7 @@ Goalkeeper::Goalkeeper()
 	y_pos_ = robot[2].getY();
 }
 
-/*void Goalkeeper::buildPotentialFields(int robot_number)
+void Goalkeeper::buildPotentialFields(int robot_number)
 {
     updateBallPos();
     Vector robot_pos(robot[robot_number].getX(),y_pos_);
@@ -29,7 +29,7 @@ Goalkeeper::Goalkeeper()
 		potential_fields_.push_back(new AttractivePotentialField(ball_line, 15));
 	else
     	stayAtTheBoundary();
-}*/
+}
 
 void Goalkeeper::updateBallPos()
 {

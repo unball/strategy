@@ -16,29 +16,29 @@
 #include <utils/vector.hpp>
 #include <ball.hpp>
 #include <robot.hpp>
-/*#include <players/regular_player.hpp>
+#include <players/regular_player.hpp>
 #include <players/goalkeeper.hpp>
 #include <players/goalkeeper_kicker.hpp>
 #include <players/initial_goalkeeper.hpp>
 #include <players/kicker_player.hpp>
-#include <players/assistent_player.hpp>*/
+#include <players/assistent_player.hpp>
 
 class TrajectoryController
 {
   public:
     TrajectoryController();
-    //~TrajectoryController();
+    ~TrajectoryController();
     //void run();
     void initialPosition();
     void stopRobot(int robot_number);
 
-    //void updatePlayer(int robot_number, player_behaviour behaviour);
+    void updatePlayer(int robot_number, player_behaviour behaviour);
 
-    //Player* getPlayer(int robot_number);
+    Player* getPlayer(int robot_number);
   private:
-    //Player* player_[3];
+    Player* player_[3];
 
-    //std::vector<PotentialField*> potential_fields_;
+    std::vector<PotentialField*> potential_fields_;
     float angle_error_prev_;
 
     // Holds whether the robot moves with direct or inverse motion.
@@ -49,6 +49,8 @@ class TrajectoryController
     //void move(int robot_number, float distance);
 
     bool isInBallRange(int robot_number);
+
+    void convertAxisToRobot(int robot_number);
 };
 
 #endif  // STRATEGY_TRAJECTORY_CONTROLLER_H_
