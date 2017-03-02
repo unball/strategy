@@ -5,19 +5,12 @@ from unball.msg import MeasurementSystemMessage
 from communication.msg import target_positions_msg
 from subprocess import call
 
-number_of_robots = 3
-
 def callback(data):
     msg = target_positions_msg()
-
-    for robot in range(number_of_robots):
-        target = [data.ball_x, data.ball_y]
-
-        msg.x[robot] = target[0]
-        msg.y[robot] = target[1]
-
+    target = [data.ball_x, data.ball_y]
+    # msg.x[0] = target[0]
+    msg.y[0] = target[1]
     pub.publish(msg)
-
 
 def start():
     global pub

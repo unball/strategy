@@ -54,7 +54,7 @@ add_executable(strategy_node
   src/utils/point.cpp
   src/utils/math.cpp
   src/utils/vector.cpp
-  
+
   src/strategy_node.cpp
   src/strategy.cpp
   src/state_estimator.cpp
@@ -62,7 +62,7 @@ add_executable(strategy_node
   src/robot.cpp
   src/ball.cpp
   src/goals.cpp
-  
+
   src/players/player.cpp
   src/players/assistent_player.cpp
   src/players/goalkeeper.cpp
@@ -79,4 +79,9 @@ add_executable(strategy_node
   src/potential_fields/tangential_potential_field.cpp
   )
 add_dependencies(strategy_node ${catkin_EXPORTED_TARGETS})
-target_link_libraries(strategy_node ${catkin_LIBRARIES}) 
+target_link_libraries(strategy_node ${catkin_LIBRARIES})
+
+catkin_install_python(PROGRAMS simple_strategy/go_to_ball.py
+                               simple_strategy/goalkeeper.py
+                               simple_strategy/relative_position_converter.py
+                      DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
