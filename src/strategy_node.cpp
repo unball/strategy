@@ -1,4 +1,4 @@
-/**
+    /**
  * @file   strategy_node.cpp
  * @author Matheus Vieira Portela
  * @date   21/03/2014
@@ -17,17 +17,18 @@
 
 #include <ros/ros.h>
 
-#include <unball/MeasurementSystemMessage.h>
-#include <unball/KeyboardMessage.h>
-#include <communication/target_positions_msg.h>
-#include <unball/strategy/strategy.hpp> // Strategy strategy;
-#include <unball/strategy/robot.hpp> // Robot robot[6];
-#include <unball/strategy/ball.hpp> // Ball ball;
+#include <strategy/MeasurementSystemMessage.h>
+#include <strategy/KeyboardMessage.h>
+#include <strategy/target_positions_msg.h>
+#include <strategy.hpp> // Strategy strategy;
+#include <goals.hpp>
+#include <robot.hpp> // Robot robot[6];
+#include <ball.hpp> // Ball ball;
 
-void initRobotsPoses();
+//void initRobotsPoses();
 void publishRobotsTargetPositions(ros::Publisher &publisher);
-void receiveMeasurementSystemMessage(const unball::MeasurementSystemMessage::ConstPtr &msg);
-void receiveKeyboardMessage(const unball::KeyboardMessage::ConstPtr &msg);
+void receiveMeasurementSystemMessage(const strategy::MeasurementSystemMessage::ConstPtr &msg);
+void receiveKeyboardMessage(const strategy::KeyboardMessage::ConstPtr &msg);
 
 int main(int argc, char **argv)
 {
@@ -38,13 +39,13 @@ int main(int argc, char **argv)
     
     ros::Subscriber sub = n.subscribe("measurement_system_topic", 1, receiveMeasurementSystemMessage);
     ros::Subscriber sub2 = n.subscribe("keyboard_topic", 1, receiveKeyboardMessage);
-    ros::Publisher publisher = n.advertise<unball::TargetPositionsMsg>("target_positions_msg", 1);
+    ros::Publisher publisher = n.advertise<strategy::target_positions_msg>("target_positions_topic", 1);
     
-    initRobotsPoses();
+    //initRobotsPoses();
 
     while (ros::ok())
     {
-        strategy.run();
+        main_strategy.run();
         publishRobotsTargetPositions(publisher);
         ros::spinOnce();
         loop_rate.sleep();
@@ -62,14 +63,14 @@ int main(int argc, char **argv)
  * For example: if a robot is set to move for 0.20 m, its initial position is (0, 0) and it is spawn at (0.3, 0), the
  * method will calculate a travelled distance of 0.30 m and return, even though its real travelled distance so far is 0!
  */
-void initRobotsPoses()
+/*void initRobotsPoses()
 {
     float x[6] = {0.37, 0.37, 0.60, -0.37, -0.37, -0.60};
     float y[6] = {0.40, -0.40, 0.0, 0.40, -0.40, 0.0};
 
     for (int i = 0; i < 6; ++i)
         robot[i].setPose(x[i], y[i], 0.0); // Initial theta is 0
-}
+}*/
 
 /**
  * Publishes the robots target positions to the strategy topic.
@@ -77,44 +78,45 @@ void initRobotsPoses()
  */
 void publishRobotsTargetPositions(ros::Publisher &publisher)
 {
-    unball::StrategyMessage msg;
+    strategy::target_positions_msg msg;
     
-    ROS_DEBUG("Publishing strategy message");
-    
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 3; i++)
     {
-        msg.x[i] = robot[i].getTargetX();
-        msg.y[i] = robot[i].getTargetY()
+        //robot[i].setTargetX(0.5);
+        //robot[i].setTargetY(0.5);
 
-        ROS_DEBUG("target_x: %f\t target_y: %f", msg.x[i], y[i]);
+        //ROS_INFO("Robots: %d x: %f\t y: %f\t\n", i, robot[i].getTargetX(), robot[i].getTargetX());
+
+        msg.x[i] = robot[i].getTargetX();
+        msg.y[i] = robot[i].getTargetY();
+
+        //ROS_INFO("target_x: %f\t target_y: %f", msg.x[i], msg.y[i]);
     }
     
     publisher.publish(msg);
 }
 
-float getAngularVel(int i) {
+/*float getAngularVel(int i) {
     float K = 1;
     float distance_x = Ball::getInstance().getX() - robot[i].getX();
     float distance_y = Ball::getInstance().getY() - robot[i].getY();
     float angle_to_ball = atan2(distance_y,distance_x);
     return K*(robot[i].getTh() - angle_to_ball);
-}
+}*/
 
 /**
  * Receives the robots locations from the vision topic.
  * @param msg an UnBall vision message pointer.
  */
-void receiveMeasurementSystemMessage(const unball::MeasurementSystemMessage::ConstPtr &msg)
+void receiveMeasurementSystemMessage(const strategy::MeasurementSystemMessage::ConstPtr &msg)
 {
-    //ROS_INF)O("\n\n[StrategyNode]:ReceiveMeasuermentSystemMessage - Receiving measurement system message");
+    //ROS_INFO("\n\n[StrategyNode]:ReceiveMeasurementSystemMessage - Receiving measurement system message");
     
     for (int i = 0; i < 6; i++)
     {
-        //ROS_INFO("Robots: %d x: %f\t y: %f\t th: %f", i, msg->x[i], msg->y[i], msg->th[i]);
         robot[i].setPose(msg->x[i], msg->y[i], msg->th[i]);
     }
 
-    //ROS_INFO("Ball: x: %f, y: %f", msg->ball_x, msg->ball_y);
     if (msg->y[2] < -0.75 or msg->y[2] > 0.75 or msg->x[2] < -0.65 or msg->x[2] > 0.65) 
     {
         //HACK: in case we do not find our goakeeper, we set our goal by:
@@ -136,10 +138,10 @@ void receiveMeasurementSystemMessage(const unball::MeasurementSystemMessage::Con
  * Receives a key from the keyboard topic.
  * @param msg a keyboard message pointer.
  */
-void receiveKeyboardMessage(const unball::KeyboardMessage::ConstPtr &msg)
+void receiveKeyboardMessage(const strategy::KeyboardMessage::ConstPtr &msg)
 {
-    ROS_ERROR("Received key: %c", msg->key);
+    ROS_INFO("Received key: %c", msg->key);
     
     Strategy::getInstance().receiveKeyboardInput(msg->key);
-    strategy.receiveKeyboardInput(msg->key);
+    main_strategy.receiveKeyboardInput(msg->key);
 }

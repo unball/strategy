@@ -8,35 +8,27 @@
  * @brief Control robots trajectory by applying potential fields.
  */
 
-#ifndef UNBALL_TRAJECTORY_CONTROLLER_H_
-#define UNBALL_TRAJECTORY_CONTROLLER_H_
+#ifndef STRATEGY_TRAJECTORY_CONTROLLER_H_
+#define STRATEGY_TRAJECTORY_CONTROLLER_H_
 
 #include <memory>
 
-#include <unball/utils/vector.hpp>
-
-#include <unball/strategy/ball.hpp>
-#include <unball/strategy/robot.hpp>
-/*#include <unball/strategy/potential_field.hpp>
-#include <unball/strategy/attractive_potential_field.hpp>
-#include <unball/strategy/parallel_potential_field.hpp>
-#include <unball/strategy/perpendicular_potential_field.hpp>
-#include <unball/strategy/repulsive_potential_field.hpp>
-#include <unball/strategy/selective_potential_field.hpp>
-#include <unball/strategy/tangential_potential_field.hpp>*/
-#include <unball/strategy/regular_player.hpp>
-#include <unball/strategy/goalkeeper.hpp>
-#include <unball/strategy/goalkeeper_kicker.hpp>
-#include <unball/strategy/initial_goalkeeper.hpp>
-#include <unball/strategy/kicker_player.hpp>
-#include <unball/strategy/assistent_player.hpp>
+#include <utils/vector.hpp>
+#include <ball.hpp>
+#include <robot.hpp>
+#include <players/regular_player.hpp>
+#include <players/goalkeeper.hpp>
+#include <players/goalkeeper_kicker.hpp>
+#include <players/initial_goalkeeper.hpp>
+#include <players/kicker_player.hpp>
+#include <players/assistent_player.hpp>
 
 class TrajectoryController
 {
   public:
     TrajectoryController();
     ~TrajectoryController();
-    void run();
+    //void run();
     void initialPosition();
     void stopRobot(int robot_number);
 
@@ -46,17 +38,19 @@ class TrajectoryController
   private:
     Player* player_[3];
 
-    //std::vector<PotentialField*> potential_fields_;
+    std::vector<PotentialField*> potential_fields_;
     float angle_error_prev_;
 
     // Holds whether the robot moves with direct or inverse motion.
     bool direct_motion_;
 
-    void controlRobot(int robot_number, Vector force);
-    void turn(int robot_number, float angle);
-    void move(int robot_number, float distance);
+    //void controlRobot(int robot_number, Vector force);
+    //void turn(int robot_number, float angle);
+    //void move(int robot_number, float distance);
 
     bool isInBallRange(int robot_number);
+
+    void convertAxisToRobot(int robot_number);
 };
 
-#endif  // UNBALL_TRAJECTORY_CONTROLLER_H_
+#endif  // STRATEGY_TRAJECTORY_CONTROLLER_H_

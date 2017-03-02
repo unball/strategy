@@ -12,14 +12,14 @@
  * the Ball class can exist and it can only be accessed through the getInstance() method, which deals with instantiation.
  */
 
-#ifndef UNBALL_BALL_H_
-#define UNBALL_BALL_H_
+#ifndef STRATEGY_BALL_H_
+#define STRATEGY_BALL_H_
 
 #include <cmath>
 
 #include <ros/ros.h>
 
-#include <unball/utils/point.hpp>
+#include <utils/point.hpp>
 
 class Ball
 {
@@ -51,4 +51,4 @@ class Ball
     Point pos_, vel_;
 };
 
-#endif  // UNBALL_BALL_H_
+#endif  // STRATEGY_BALL_H_

@@ -10,15 +10,15 @@
  * Defines robots for strategy
  */
 
-#ifndef UNBALL_ROBOT_H_
-#define UNBALL_ROBOT_H_
+#ifndef STRATEGY_ROBOT_H_
+#define STRATEGY_ROBOT_H_
 
 #include <cmath>
 
 #include <ros/ros.h>
 
-#include <unball/utils/point.hpp>
-#include <unball/utils/math.hpp>
+#include <utils/point.hpp>
+#include <utils/math.hpp>
 
 #define ROBOT_SATURATION_LIN_VEL 5.0
 #define ROBOT_SATURATION_ANG_VEL 2.0
@@ -79,5 +79,5 @@ class Robot
 
 extern Robot robot[6];
 
-#endif  // UNBALL_ROBOT_H_
+#endif  // STRATEGY_ROBOT_H_
 

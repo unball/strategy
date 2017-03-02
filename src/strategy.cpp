@@ -11,9 +11,9 @@
  * Implements strategy for robots
  */
 
-#include <unball/strategy/strategy.hpp>
+#include <strategy.hpp>
 
-Strategy strategy;
+Strategy main_strategy;
 
 /**
  * Strategy instance.
@@ -45,7 +45,7 @@ void Strategy::receiveKeyboardInput(char key)
         	PauseGame();
             break;
         case 'k': case 'K':
-            GoalKick();
+            //GoalKick();
             break;
     }
 }
@@ -56,7 +56,7 @@ void Strategy::receiveKeyboardInput(char key)
 */
 void Strategy::PauseGame()
 {
-	ROS_INFO("[Strategy] Keyboard input: Setting game state PAUSED");
+	//ROS_INFO("[Strategy] Keyboard input: Setting game state PAUSED");
 	state_estimator_.setGameState(WorldState::GAME_PAUSED);
 
 	for (int i=0;i<3;i++)
@@ -65,14 +65,14 @@ void Strategy::PauseGame()
 
 void Strategy::ResumeGame()
 {
-	ROS_INFO("[Strategy] Keyboard input: Setting game state RUNNING");
+	//ROS_INFO("[Strategy] Keyboard input: Setting game state RUNNING");
 	state_estimator_.setGameState(WorldState::GAME_RUNNING);
 }
 
-/*void Strategy::GoalKick()
+void Strategy::GoalKick()
 {
     trajectory_controller_.updatePlayer(2,GOALKEEPER_KICKER);
-}*/
+}
 
 /**
  * Run strategy methods that should be called each strategy iteration.
@@ -83,11 +83,11 @@ void Strategy::run()
     {
       state_estimator_.update();
       updatePlayers();
-      trajectory_controller_.initialPosition();
       //trajectory_controller_.run();
     }
     else
     {
+      //ROS_INFO("\nGAME_PAUSED\n");
       for (int i=0;i<3;i++)
         trajectory_controller_.stopRobot(i);
     }
@@ -98,7 +98,7 @@ void Strategy::run()
  */
 void Strategy::updatePlayers()
 {
-    for (int i=0;i<3;i++)
+    for (int i = 0; i < 3; i++)
     {
        if (trajectory_controller_.getPlayer(i)->getBehaviour() == INITIAL_GOALKEEPER)
        {
@@ -119,15 +119,13 @@ void Strategy::updatePlayers()
        }
        else if (trajectory_controller_.getPlayer(i)->getBehaviour() == KICKER_PLAYER)
        {
-             if (not hasBall(i))
+            if (not hasBall(i))
                  trajectory_controller_.updatePlayer(i,ASSISTENT_PLAYER);
        }
        else if (trajectory_controller_.getPlayer(i)->getBehaviour() == ASSISTENT_PLAYER)
        {
             if (isThere(KICKER_PLAYER))
-            {
                 setKickerForAssistent(i);
-            }
             else
             {
                 if (hasBall(i))

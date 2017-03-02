@@ -8,7 +8,7 @@
  * @brief Control robots trajectory by applying potential fields.
  */
 
-#include <unball/strategy/trajectory_controller.hpp>
+#include <trajectory_controller.hpp>
 
 TrajectoryController::TrajectoryController()
 {
@@ -24,7 +24,7 @@ TrajectoryController::~TrajectoryController()
         delete player_[i];
 }
 
-void TrajectoryController::run()
+/*void TrajectoryController::run()
 {
     Vector resultant_force;
     for (int i=0;i<3;i++)
@@ -36,7 +36,7 @@ void TrajectoryController::run()
         player_[i]->clearPotentialFields();
         controlRobot(i, resultant_force);
     }
-}
+}*/
 
 void TrajectoryController::initialPosition()
 {
@@ -47,10 +47,24 @@ void TrajectoryController::initialPosition()
     {
         robot[i].setTargetX(target_position_x[i]-robot[i].getX());
         robot[i].setTargetY(target_position_y[i]-robot[i].getY());
+        convertAxisToRobot(i);
     }
 }
 
-void TrajectoryController::controlRobot(int robot_number, Vector force)
+void TrajectoryController::convertAxisToRobot(int robot_number)
+{
+    float x = robot[robot_number].getTargetX();
+    float y = robot[robot_number].getTargetY();
+
+    robot[robot_number].setTargetX(x*cos(-robot[robot_number].getTh())
+                                - y*sin(-robot[robot_number].getTh()));
+    robot[robot_number].setTargetY(x*sin(-robot[robot_number].getTh())
+                                + y*cos(-robot[robot_number].getTh()));
+    ROS_INFO("TrajectoryController::convertAxisToRobot");
+    ROS_INFO("robot[%d]: x = %f, y = %f", robot_number, robot[robot_number].getTargetX(),robot[robot_number].getTargetY());
+}
+
+/*void TrajectoryController::controlRobot(int robot_number, Vector force)
 {
     // Use histeresis to void quickly changing direction.
     float error_margin = 15*M_PI/180;
@@ -96,9 +110,9 @@ void TrajectoryController::move(int robot_number, float distance)
         robot[robot_number].setLinVel(lin_vel);
     // else
     //     robot[robot_number].setLinVel(0);
-}
+}*/
 
-void TrajectoryController::turn(int robot_number, float angle)
+/*void TrajectoryController::turn(int robot_number, float angle)
 {
     const float ANG_KP = 0.008;
     const float ANG_KD = 0;
@@ -109,7 +123,7 @@ void TrajectoryController::turn(int robot_number, float angle)
     angle_error_prev_ = angle_error;
 
     robot[robot_number].setAngVel(ang_vel);
-}
+}*/
 
 void TrajectoryController::stopRobot(int robot_number)
 {

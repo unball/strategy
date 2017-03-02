@@ -11,15 +11,15 @@
  * Defines strategy for robots. Strategy is a singleton.
  */
 
-#ifndef UNBALL_STRATEGY_H_
-#define UNBALL_STRATEGY_H_
+#ifndef STRATEGY_STRATEGY_H_
+#define STRATEGY_STRATEGY_H_
 
 #include <ros/ros.h>
 
-#include <unball/strategy/state_estimator.hpp>
-#include <unball/strategy/trajectory_controller.hpp>
+#include <state_estimator.hpp>
+#include <trajectory_controller.hpp>
 
-/*namespace TeamState
+namespace TeamState
 {
     enum StrategyState
     {
@@ -28,7 +28,7 @@
         DEFENSIVE,
         STALLING
     };
-};*/
+}
 
 class Strategy
 {
@@ -48,15 +48,15 @@ class Strategy
     void ResumeGame();
     void GoalKick();
 
-    /*void updatePlayers();
+    void updatePlayers();
 
     void setKickerForAssistent(int assistent);
 
     bool isThere(player_behaviour behaviour);
     int find(player_behaviour behaviour);
-    bool hasBall(int robot_number);*/
+    bool hasBall(int robot_number);
 };
 
-extern Strategy strategy;
+extern Strategy main_strategy;
 
-#endif  // UNBALL_STRATEGY_H_
+#endif  // STRATEGY_STRATEGY_H_

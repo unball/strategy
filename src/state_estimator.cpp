@@ -10,7 +10,7 @@
  * A class that estimates the state of the game based on the data given by the camera
  */
 
-#include <unball/strategy/state_estimator.hpp>
+#include <state_estimator.hpp>
 
  StateEstimator::StateEstimator()
  {
@@ -134,6 +134,6 @@ void StateEstimator::updateBallPossessionState()
 /**
  * Updates the score each time a team makes a goal.
  */
-void StateEstimator::updateScore()
+/*void StateEstimator::updateScore()
 {
-}
+}*/
