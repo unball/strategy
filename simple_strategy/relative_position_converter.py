@@ -22,7 +22,7 @@ def convertTargetPositions(global_target):
 
     for robot in range(number_of_robots):
         relative_target = [global_target.x[robot] - allies_x[robot], global_target.y[robot] - allies_y[robot]]
-        relative_target = convert_axis_to_robot(relative_target, math.radians(allies_th[robot]))
+        relative_target = convert_axis_to_robot(relative_target, allies_th[robot])
 
         msg.x[robot] = relative_target[0]
         msg.y[robot] = relative_target[1]
