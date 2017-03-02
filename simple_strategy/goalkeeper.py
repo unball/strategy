@@ -6,6 +6,8 @@ from communication.msg import target_positions_msg
 from subprocess import call
 
 our_field_side = 'left'
+goal_area_x_position = 0.68
+goal_area_max_y = 0.17
 
 def main():
     global pub
@@ -24,20 +26,23 @@ def callback(data):
     for i in [1, 2]:
         msg.x[i] = data.x[i]
         msg.y[i] = data.y[i]
+
     pub.publish(msg)
 
 def calculateGoalkeeperObjective(ball_pos):
     objective = [0, 0]
-    objective[0] = 0.68
+    objective[0] = goal_area_x_position
     if our_field_side == 'left':
-        objective[0] = objective[0] * -1
-    objective[1] = ball_pos[1]
-    if objective[1] > 0.13:
-        objective[1] = 0.13
-    if objective[1] < -0.13:
-        objective[1] = -0.13
+        objective[0] *= -1
+    objective[1] = clamp(ball_pos[1], -goal_area_max_y, goal_area_max_y)
     return objective
 
+def clamp(value, min, max):
+    if value > max:
+        value = max
+    if value < min:
+        value = min
+    return value
 
 if __name__ == '__main__':
     main()
