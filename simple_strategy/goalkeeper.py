@@ -28,9 +28,10 @@ def callback(data):
 
 def calculateGoalkeeperObjective(ball_pos):
     objective = [0, 0]
-    objective[0] = 0.65
+    objective[0] = 0.68
     if our_field_side == 'left':
-        objective[1] = ball_pos[1]
+        objective[0] = objective[0] * -1
+    objective[1] = ball_pos[1]
     if objective[1] > 0.13:
         objective[1] = 0.13
     if objective[1] < -0.13:
