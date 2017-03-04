@@ -58,3 +58,26 @@ class RepulsivePotentialField:
 
         return polar2cart(difference)
 
+class TangencialPotentialField(object):
+    """Tangencial potential field
+        @origin Point that starts the field - Cartesian coordinates
+    """
+    def __init__(self, origin, magnitude):
+        self.origin = origin
+        self.magnitude = magnitude
+
+    def calculate_force(self, position):
+        difference = cart2polar(position - self.origin)
+        difference[0] = self.magnitude
+        difference[1] += np.pi
+
+        return polar2cart(difference)
+
+
+class ConstantPotentialField:
+    def __init__(self, field_force):
+        self.field_force = field_force
+
+    def calculate_force(self):
+        return self.field_force
+
