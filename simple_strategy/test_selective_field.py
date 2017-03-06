@@ -14,20 +14,28 @@ from subprocess import call
 #
 # You can see the potential_fields.py to more informations
 
-BALL_ATTRACTIVE = 4
+SELECTIVE_WIDTH = np.pi/4
+SELECTIVE_RANGE = 1
 
+side_opponent = 'Right'
 number_of_robots = 1
 
 def callback(data):
     msg = target_positions_msg()
 
+    if(side_opponent == 'Right'):
+        opponent_goal =  np.array([0.8, 0])
+    else:
+        opponent_goal =  np.array([-0.8, 0])
+    direction = np.array([data.ball_x, data.ball_y]) - opponent_goal
+
     #Creating attractive potential
-    attract_ball = pf.AttractivePotentialField(
+    selective_field = pf.SelectivePotentialField(
                         np.array([data.ball_x, data.ball_y]),
-                        BALL_ATTRACTIVE, min_magnitude=0.3)
+                        SELECTIVE_WIDTH, SELECTIVE_RANGE, direction, opponent_goal, 4, 0.3)
 
     for robot in range(number_of_robots):
-        resultant_vector = attract_ball.calculate_force(np.array([data.x[robot], data.y[robot]]))
+        resultant_vector = selective_field.calculate_force(np.array([data.x[robot], data.y[robot]]))
         msg.x[robot] = resultant_vector[0]
         msg.y[robot] = resultant_vector[1]
 

@@ -29,13 +29,11 @@ class AttractivePotentialField:
         self.min_magnitude = min_magnitude
 
     def calculate_force(self, position):
-        difference = cart2polar(self.origin - position)
-        difference *= np.array([self.magnitude, 1])
+        return self.origin
+        #difference = difference*np.array([self.magnitude, 1])
 
-        if(difference[0] < self.min_magnitude):
-            difference[0] = self.min_magnitude
-
-        return polar2cart(difference)
+        #if(difference[0] < self.min_magnitude):
+        #    difference[0] = self.min_magnitude
 
 class RepulsivePotentialField:
     """Radial repulsive potential field
@@ -58,7 +56,7 @@ class RepulsivePotentialField:
 
         return polar2cart(difference)
 
-class TangencialPotentialField(object):
+class TangencialPotentialField:
     """Tangencial potential field
         @origin Point that starts the field - Cartesian coordinates
     """
@@ -67,12 +65,48 @@ class TangencialPotentialField(object):
         self.magnitude = magnitude
 
     def calculate_force(self, position):
-        difference = cart2polar(position - self.origin)
+        difference = cart2polar(self.origin - position)
         difference[0] = self.magnitude
-        difference[1] += np.pi
+        difference[1] += np.pi/2.5
+        print difference[1]
 
         return polar2cart(difference)
 
+class SelectivePotentialField:
+    """Selective Potential field
+    set a combination of fields thats allows to kick the ball inside
+    of a conic region
+        @origin Point that starts the field - Cartesian coordinates
+        @direction Vector that indicates the direction
+        @magnitude
+    x"""
+
+    def __init__(self, origin, width, range_field, direction, goal,
+                mag_attractive_field, mag_tangencial_field):
+        self.origin = origin
+        self.width = width
+        self.range_field = range_field
+        self.direction = direction
+        self.mag_attractive_field = mag_attractive_field
+        self.mag_tangencial_field = mag_tangencial_field
+        self.goal = goal
+
+    def calculate_force(self, position):
+        angle = cart2polar(self.direction)[1]
+        difference = position - self.origin
+        force = np.array([0, 0])
+        weight = 1.0
+        if((np.fabs(angle - cart2polar(difference)[1]) <= weight*self.width) and (cart2polar(difference)[0] <= 0.4)):
+            attractive_field = AttractivePotentialField(self.goal, self.mag_attractive_field)
+            force = attractive_field.calculate_force(position)
+            print 'ME SEGURA TO INDO'
+
+        else:
+            tangencial_field = TangencialPotentialField(self.origin, self.mag_tangencial_field)
+            force = tangencial_field.calculate_force(position)
+            print 'RODA A ROLETA'
+
+        return force
 
 class ConstantPotentialField:
     def __init__(self, field_force):

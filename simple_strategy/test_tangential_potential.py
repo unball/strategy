@@ -14,7 +14,7 @@ from subprocess import call
 # You can see the potential_fields.py to more informations
 
 
-TANGENCIAL_BALL_MAGNITUDE = 1.5
+TANGENCIAL_BALL_MAGNITUDE = 0.3
 
 number_of_robots = 3
 
