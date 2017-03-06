@@ -40,7 +40,6 @@ def convert_axis_to_robot(vector, th):
     return [x,y]
 
 def start():
-    print "teste"
     global pub
 
     rospy.init_node('relative_position_node')
