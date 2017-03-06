@@ -41,9 +41,7 @@ def callback(data):
 
     player.setPositions(allies = allies, ball = ball)
 
-    goalkeeperObjective = player.getTarget()
-    msg.x[0] = goalkeeperObjective[0]
-    msg.y[0] = goalkeeperObjective[1]
+    msg.x[0], msg.y[0] = player.getTarget() 
 
     # Make other robots stay in position
     for i in [1, 2]:

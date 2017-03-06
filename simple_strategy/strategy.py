@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 from goalkeeper import *
+from go_to_ball import *
 
-number_of_robots = 1
+number_of_robots = 3
 
 allies = [[], [], []]
 ball = []
 
-players = [Goalkeeper()]
+players = [Goalkeeper(), Go_To_Ball(), Go_To_Ball()]
 
 def callback(data):
     msg = target_positions_msg()
