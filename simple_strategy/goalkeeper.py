@@ -6,7 +6,6 @@ from unball.msg import MeasurementSystemMessage
 from communication.msg import target_positions_msg
 from subprocess import call
 
-our_field_side = 'left'
 goal_area_x_position = 0.68
 goal_area_max_y = 0.17
 
@@ -18,7 +17,7 @@ class Goalkeeper(Player):
     def getTarget(self):
         objective = [0, 0]
         objective[0] = goal_area_x_position
-        if our_field_side == 'left':
+        if self.field_side == 'left':
             objective[0] *= -1
         objective[1] = clamp(self.ball[1], -goal_area_max_y, goal_area_max_y)
         return objective

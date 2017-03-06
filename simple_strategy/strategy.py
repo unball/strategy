@@ -18,7 +18,7 @@ def callback(data):
         allies[robot] = [data.x[robot], data.y[robot]]
 
     for robot in range(number_of_robots):
-        players[robot].setPositions(allies = allies, ball = ball)
+        players[robot].setPositions(allies = allies, ball = ball, my_index = robot)
         msg.x[robot], msg.y[robot] = players[robot].getTarget()
 
     pub.publish(msg)
