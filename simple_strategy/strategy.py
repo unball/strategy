@@ -1,34 +1,27 @@
 #!/usr/bin/env python
-import rospy
-import math
-from player import *
-from unball.msg import MeasurementSystemMessage
-from communication.msg import target_positions_msg
-from subprocess import call
+from goalkeeper import *
+from go_to_ball import *
 
 number_of_robots = 3
 
+allies = [[], [], []]
 ball = []
 
-class Go_To_Ball(Player):
-    def getTarget(self):
-        return self.ball
-
-player = [Go_To_Ball(), Go_To_Ball(), Go_To_Ball()]
+players = [Goalkeeper(), Go_To_Ball(), Go_To_Ball()]
 
 def callback(data):
     msg = target_positions_msg()
+
     ball = [data.ball_x, data.ball_y]
 
     for robot in range(number_of_robots):
-        player[robot].setPositions(ball = ball)
-        target = player[robot].getTarget()
+        allies[robot] = [data.x[robot], data.y[robot]]
 
-        msg.x[robot] = target[0]
-        msg.y[robot] = target[1]
+    for robot in range(number_of_robots):
+        players[robot].setPositions(allies = allies, ball = ball, my_index = robot)
+        msg.x[robot], msg.y[robot] = players[robot].getTarget()
 
     pub.publish(msg)
-
 
 def start():
     global pub
