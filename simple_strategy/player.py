@@ -15,3 +15,6 @@ class Player(object):
         self.ball = ball
         self.my_index = my_index
         self.field_side = field_side
+
+    def stopRobot(self):
+        return self.allies[self.my_index][0], self.allies[self.my_index][1]
