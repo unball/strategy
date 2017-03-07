@@ -15,7 +15,7 @@ allies = [ [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
 
 class Kicker(Player):
     def getTarget(self):
-        K_ball = 10
+        K_ball = 13
 
         robot = np.array([self.allies[self.my_index][0], self.allies[self.my_index][1]])
 
@@ -32,9 +32,9 @@ class Kicker(Player):
         robot_to_ball = self.ball - robot
         robot_to_ball_mag = pf.cart2polar(robot_to_ball)[0]
 
-        if((np.fabs(goal_to_ball_angle - goal_to_robot_angle) <= np.pi/10)
+        if((np.fabs(goal_to_ball_angle - goal_to_robot_angle) <= np.pi/6)
                     and is_on_attack_mode(robot[0], self.ball[0])
-                    and (robot_to_ball_mag <= 0.1)):
+                    and (robot_to_ball_mag <= 0.07)):
             target = opponent_goal
             print ' gol de placa'
         else:

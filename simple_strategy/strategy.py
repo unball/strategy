@@ -2,14 +2,17 @@
 from goalkeeper import *
 from go_to_ball import *
 from kicker import *
+from defender import *
 from unball.msg import KeyboardMessage
 
-number_of_robots = 2
+number_of_robots = 3
 
 allies = [[], [], []]
 ball = []
 
-players = [Kicker(), Goalkeeper()]
+players = [Kicker(), Goalkeeper(), Go_To_Ball()]
+#players = [Go_To_Ball(), Goalkeeper(), Kicker()]
+
 
 def callback(data):
     global game_paused
