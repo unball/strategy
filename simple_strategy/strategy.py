@@ -12,6 +12,7 @@ ball = []
 players = [Go_To_Ball(), Goalkeeper()]
 
 def callback(data):
+    global game_paused
     msg = target_positions_msg()
 
     ball = [data.ball_x, data.ball_y]
