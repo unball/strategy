@@ -9,6 +9,8 @@ number_of_robots = 3
 
 allies = [[], [], []]
 ball = []
+field_side = 'Left'
+game_paused = 'True'
 
 players = [Kicker(), Goalkeeper(), Go_To_Ball()]
 #players = [Go_To_Ball(), Goalkeeper(), Kicker()]
@@ -45,7 +47,7 @@ def keyboard_callback(data):
 
 def field_side_callback(data):
     global field_side
-    field_side = data.data        
+    field_side = data.data
 
 def start():
     global pub
