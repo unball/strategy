@@ -19,6 +19,7 @@ class Kicker(Player):
 
         robot = np.array([self.allies[self.my_index][0], self.allies[self.my_index][1]])
 
+        side_opponent = self.field_side
         if(side_opponent == 'Right'):
             opponent_goal =  np.array([0.8, 0])
         else:

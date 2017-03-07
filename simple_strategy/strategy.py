@@ -9,7 +9,7 @@ number_of_robots = 2
 allies = [[], [], []]
 ball = []
 
-players = [Go_To_Ball(), Goalkeeper()]
+players = [Kicker(), Goalkeeper()]
 
 def callback(data):
     global game_paused
