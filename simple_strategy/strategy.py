@@ -21,7 +21,7 @@ def callback(data):
         allies[robot] = [data.x[robot], data.y[robot]]
 
     for robot in range(number_of_robots):
-        players[robot].setPositions(allies = allies, ball = ball, my_index = robot)
+        players[robot].setPositions(allies = allies, ball = ball, my_index = robot, field_side = field_side)
 
         if game_paused == True:
             msg.x[robot], msg.y[robot] = players[robot].stopRobot()
@@ -40,12 +40,17 @@ def keyboard_callback(data):
     elif key == 'p'or key == 'P':
         game_paused = True
 
+def field_side_callback(data):
+    global field_side
+    field_side = data.data        
+
 def start():
     global pub
     pub = rospy.Publisher('target_positions_topic', target_positions_msg, queue_size=10)
     rospy.init_node('strategy')
     rospy.Subscriber('measurement_system_topic', MeasurementSystemMessage, callback)
     rospy.Subscriber('keyboard_topic', KeyboardMessage, keyboard_callback)
+    rospy.Subscriber('field_side_topic', String, field_side_callback)
     rospy.spin()
 
 if __name__ == '__main__':
