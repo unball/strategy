@@ -32,10 +32,10 @@ def convertTargetPositions(global_target):
 #Receive angle in radians
 def convert_axis_to_robot(vector, th):
     ax = vector[0]
-    ay = vector[1]
+    ay = -vector[1]
 
-    y = ax*math.cos(-th) - ay*math.sin(-th)
-    x = ax*math.sin(-th) + ay*math.cos(-th)
+    y = ax*math.cos(th) - ay*math.sin(th)
+    x = ax*math.sin(th) + ay*math.cos(th)
 
     return [x,y]
 
