@@ -9,7 +9,6 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   message_generation
   rospy
-  measurement_system
   communication
 )
 
