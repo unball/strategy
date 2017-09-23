@@ -21,9 +21,8 @@
   <build_depend>std_msgs</build_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>message_generation</build_depend>
-  <build_depend>unball</build_depend>
   <build_depend>rospy</build_depend>
-
+  <build_depend>measurement_system</build_depend>
 
   <run_depend>rospy</run_depend>
   <run_depend>roscpp</run_depend>

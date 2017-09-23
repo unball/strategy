@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 import math
-from unball.msg import MeasurementSystemMessage
+from measurement_system.msg import measurement_msg
 from communication.msg import target_positions_msg
 from subprocess import call
 
@@ -44,7 +44,7 @@ def start():
 
     rospy.init_node('relative_position_node')
     pub = rospy.Publisher('relative_positions_topic', target_positions_msg, queue_size=10)
-    rospy.Subscriber('measurement_system_topic', MeasurementSystemMessage, receiveGlobalPositions)        
+    rospy.Subscriber('measurement_system_topic', measurement_msg, receiveGlobalPositions)        
     rospy.Subscriber('target_positions_topic', target_positions_msg, convertTargetPositions)
     rospy.spin()
 
