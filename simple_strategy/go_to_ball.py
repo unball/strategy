@@ -2,7 +2,7 @@
 import rospy
 import math
 from player import *
-from unball.msg import MeasurementSystemMessage
+from measurement_system.msg import measurement_msg
 from communication.msg import target_positions_msg
 from subprocess import call
 
@@ -34,7 +34,7 @@ def start():
     global pub
     pub = rospy.Publisher('target_positions_topic', target_positions_msg, queue_size=10)
     rospy.init_node('strategy')
-    rospy.Subscriber('measurement_system_topic', MeasurementSystemMessage, callback)
+    rospy.Subscriber('measurement_system_topic', measurement_msg, callback)
     rospy.spin()
 
 if __name__ == '__main__':
