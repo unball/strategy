@@ -17,7 +17,7 @@ def callback(data):
     msg = target_positions_msg()
     set_3_pnts(msg)
     pub.publish(msg)
-    rospy.sleep(10.)
+    rospy.sleep(3.)
     position = -1 * position
 
 
