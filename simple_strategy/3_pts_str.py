@@ -3,22 +3,25 @@ import math
 from measurement_system.msg import measurement_msg
 from communication.msg import target_positions_msg
 
-number_of_robots = 3
+global k
+k = 1
 
-global position = 0.5
+def set_3_pnts(msg, k):
+    msg.y[0] = 0.5 * k
+    msg.x[0] = 0.5
 
-def set_3_pnts(msg):
-    for robot in range(number_of_robots):
-        msg.x[robot] = position
-        msg.y[robot] = position
+    msg.y[1] = 0.5 * k
+    msg.x[1] = 0
 
+    msg.y[2] = 0.5 * k
+    msg.x[2] = -0.5
 
 def callback(data):
     msg = target_positions_msg()
     set_3_pnts(msg)
     pub.publish(msg)
     rospy.sleep(3.)
-    position = -1 * position
+    k = k * -1
 
 
 def start():
