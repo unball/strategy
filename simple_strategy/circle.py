@@ -1,11 +1,10 @@
 import rospy
 import math
 from player import *
-from unball.msg import MeasurementSystemMessage
+from measurement_system.msg import measurement_msg
 from communication.msg import target_positions_msg
 from subprocess import call
 
-start_time = rospy.get_time()
 number_of_robots = 3
 #Class Circle
 w = 0.1
@@ -26,18 +25,20 @@ def obt_circle(msg):
     yd = (r * sin(th)) + org_y
 
     for robot in range(number_of_robots):
-        if robot == 0
+        if robot == 0:
             msg.x[robot] = xd
             msg.y[robot] = yd
-        else
+        else:
             msg.x[robot] = org_x
             msg.y[robot] = org_y
 
 def start():
+
     global pub
-    rospy.Subscriber('measurement_system_topic',MeasurementSystemMessage,callback)
+    pub = rospy.Publisher('target_positions_topic', target_positions_msg, queue_size=10)
     rospy.init_node('strategy')
-    pub = rospy.Publisher('target_positions_msg', target_positions_msg, queue_size = 10)
+    start_time = rospy.get_time()
+    rospy.Subscriber('measurement_system_topic', measurement_msg, callback)
     rospy.spin()
 
 
