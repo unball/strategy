@@ -5,7 +5,7 @@ from communication.msg import target_positions_msg
 
 number_of_robots = 3
 
-global position
+global position = 0.5
 
 def set_3_pnts(msg):
     for robot in range(number_of_robots):
