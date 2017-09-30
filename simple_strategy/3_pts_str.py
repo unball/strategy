@@ -5,13 +5,9 @@ from communication.msg import target_positions_msg
 
 number_of_robots = 3
 
-global start_time
-
 global position
 
 def set_3_pnts(msg):
-    current_time = int(rospy.get_time()) - int(start_time)
-
     for robot in range(number_of_robots):
         msg.x[robot] = position
         msg.y[robot] = position
@@ -34,5 +30,4 @@ def start():
 
 if __name__ == '__main__':
     rospy.init_node('strategy')
-    start_time = rospy.get_time()
     start()
