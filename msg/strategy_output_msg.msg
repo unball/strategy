@@ -5,4 +5,4 @@ float32[3] u
 float32[3] w
 float32[3] vx
 float32[3] vy
-int8 flag
+int8[3] flag
