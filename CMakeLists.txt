@@ -20,6 +20,7 @@ add_message_files(DIRECTORY msg FILES
    KeyboardMessage.msg
    MeasurementSystemMessage.msg
    target_positions_msg.msg
+   strategy_output_msg.msg
 )
 generate_messages(DEPENDENCIES std_msgs)
 
