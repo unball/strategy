@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import rospy
-import math
+from math import *
 from measurement_system.msg import measurement_msg
 from communication.msg import target_positions_msg
 from strategy.msg import strategy_output_msg
@@ -20,11 +20,11 @@ def callback(data):
 
     msg.x[1] = 0
     msg.y[1] = 0.5
-    msg.th[0] = pi
+    msg.th[1] = pi
 
     msg.x[2] = 0.5
     msg.y[2] = 0.5
-    msg.th[0] = pi*(3/2)
+    msg.th[2] = pi*(3./2)
 
     pub.publish(msg)
     
