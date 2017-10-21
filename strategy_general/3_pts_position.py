@@ -6,30 +6,26 @@ from communication.msg import target_positions_msg
 from strategy.msg import strategy_output_msg
 from control_options import *
 
-start_time = rospy.get_time()
-k = 1
-interval_time = 5 # in seconds
+
 
 
 def callback(data):
-    current_time = rospy.get_time() - start_time
-
     msg = strategy_output_msg()
+
     msg.control_options = [control_options.position, control_options.position, control_options.position]
 
-    if int(current_time) % sleep_time == 0:
-        k = k * -1
-
     msg.x[0] = -0.5
-    msg.y[0] = 0.5 * k
+    msg.y[0] = 0.5
 
     msg.x[1] = 0
-    msg.y[1] = 0.5 * k
+    msg.y[1] = 0.5
 
     msg.x[2] = 0.5
-    msg.y[2] = 0.5 * k
+    msg.y[2] = 0.5
 
     pub.publish(msg)
+    
+
 
 
 def start():
