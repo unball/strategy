@@ -18,17 +18,17 @@ def states(y_b, y_goalkeeper, state):
 
 def state_machine(state, y_b, msg):
     if state == 1:
-        msg.y[0] = y_b
-        msg.th[0] = math.pi / 2
+        msg.y[2] = y_b
+        msg.th[2] = math.pi / 2
     if state == 2:
-        msg.y[0] = y_b
-        msg.th[0] = math.pi * (3. / 2)
+        msg.y[2] = y_b
+        msg.th[2] = math.pi / 2
     if state == 3:
-        msg.y[0] = end_y
-        msg.th[0] = math.pi * (3. / 2)
+        msg.y[2] = end_y
+        msg.th[2] = math.pi / 2
     if state == 4:
-        msg.y[0] = (-1) * end_y
-        msg.th[0] = math.pi / 2
+        msg.y[2] = (-1) * end_y
+        msg.th[2] = math.pi / 2
 
 def callback(data):
     msg = strategy_output_msg()
@@ -41,7 +41,7 @@ def callback(data):
 
     state = 1
 
-    states(ball[1], data.y[0], state)
+    states(ball[1], data.y[2], state)
     state_machine(state, ball[1], msg)
 
     pub.publish(msg)
