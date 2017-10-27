@@ -33,9 +33,9 @@ def state_machine(state, y_b, msg):
 def callback(data):
     msg = strategy_output_msg()
 
-    msg.control_options = [control_options.pose_line,
+    msg.control_options = [control_options.pose,
                            control_options.pose_line,control_options.pose_line]
-    msg.x = [fixed_x, fixed_x , fixed_x]
+    msg.x = [-fixed_x, -fixed_x , fixed_x]
 
     ball = [data.ball_x, data.ball_y]
 
@@ -52,8 +52,7 @@ def start():
     end_y = 0.16
     global fixed_x
     fixed_x = 0.60
-    pub = rospy.Publisher('strategy_output_topic',
-                           strategy_output_msg, queue_size=10)
+    pub = rospy.Publisher('strategy_output_topic', strategy_output_msg, queue_size=10)
     rospy.init_node('strategy')
     rospy.Subscriber('measurement_system_topic', measurement_msg, callback)
     rospy.spin()
