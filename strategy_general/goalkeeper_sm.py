@@ -33,8 +33,8 @@ def state_machine(state, y_b, msg):
 def callback(data):
     msg = strategy_output_msg()
 
-    msg.control_options = [control_options.pose,
-                           control_options.pose,control_options.pose]
+    msg.control_options = [control_options.pose_line,
+                           control_options.pose_line,control_options.pose_line]
     msg.x = [fixed_x, fixed_x , fixed_x]
 
     ball = [data.ball_x, data.ball_y]
