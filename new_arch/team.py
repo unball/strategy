@@ -1,5 +1,8 @@
 from player import *
 from goalkeeper import *
+from go_to_ball import *
+from go_to_position import *
+
 
 robot_id = [0, 1, 2]
 number_of_robots = 3
@@ -17,8 +20,8 @@ class Team():
 
     def __init__(self):
 
-        players = [Player(Goalkeeper(robot_id[0])),
-                   Player(Goalkeeper(robot_id[1])),
+        players = [Player(Go_to_Position(robot_id[0], 0.5, 0.5)),
+                   Player(Go_to_Ball(robot_id[1])),
                    Player(Goalkeeper(robot_id[2]))]
 
         for robot in range(number_of_robots):

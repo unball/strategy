@@ -2,7 +2,7 @@ class Player(object):
     target = [0, 0]
     th = 0
     control_option = 0
-    
+
     def __init__(self, strategy):
         self.target = strategy.getTarget()
         self.th = strategy.getTh()
