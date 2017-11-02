@@ -32,7 +32,7 @@ def callback(data):
 
 def start():
     global pub
-    pub = rospy.Publisher('strategy_output_topic', strategy_output_msg, queue_size=10)
+    pub = rospy.Publisher('strategy_output_topic', strategy_output_msg, queue_size=1)
     rospy.init_node('strategy')
     rospy.Subscriber('measurement_system_topic', measurement_msg, callback)
     rospy.spin()
