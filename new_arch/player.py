@@ -1,13 +1,13 @@
+from point import Point
+
 class Player(object):
     target = [0, 0]
     th = 0
     control_option = 0
 
     def __init__(self, strategy):
-        self.target = strategy.getTarget()
-        self.th = strategy.getTh()
-        self.control_option = strategy.getControl_Option()
-
+        self.pos = Point()        
+        self.strategy = strategy
     def getTarget(self):
         return self.target
 
@@ -19,3 +19,19 @@ class Player(object):
 
     def printValues(self):
         print self.target, self.th, self.control_option
+
+    def set_own_state(self, x, y, th):
+        self.pos = Point(x, y)
+        self.th = th
+        self.strategy.set_robot_state(self.pos, th)
+
+    def set_ball_state(self, ball):
+        self.ball = ball
+        self.strategy.set_ball_position(ball)
+    
+    def play(self):
+        self.strategy.calculate_goal()
+
+    def goal(self):
+        return self.strategy.get_strategy_output()
+

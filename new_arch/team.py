@@ -2,34 +2,40 @@ from player import *
 from goalkeeper import *
 from go_to_ball import *
 from go_to_position import *
+from point import Point
 
-
-robot_id = [0, 1, 2]
 number_of_robots = 3
 
 class Team():
-
-    x = [0, 0, 0]
-    y = [0, 0, 0]
-    th = [0, 0, 0]
-    w = [0 ,0 ,0]
-    v = [0 ,0 ,0]
-    vx = [0 ,0 ,0]
-    vy = [0 ,0 ,0]
-    control_option = [0, 0, 0]
-
     def __init__(self):
+        self.players = [Player(Go_to_Ball()), Player(Go_to_Ball())]
+        self.ball = Point()
+        self.robots_pos_x = []
+        self.robots_pos_y = [] 
+        self.robots_th = []
+        self.v = []
+        self.w = []
+        self.vx = []
+        self.vy = []
+        self.strategy_output = []
+    
+    def set_params(self, ball, robots_pos_x, robots_pos_y, robots_th):
+        self.robots_pos_x = robots_pos_x
+        self.robots_pos_y = robots_pos_y 
+        self.robots_th = robots_th
+        self.ball = ball
+    
+    def run(self):
+        for player, pos_x, pos_y, th in zip(self.players, self.robots_pos_x, 
+                                        self.robots_pos_y, self.robots_th):
+            player.set_own_state(pos_x, pos_y, th)
+            player.set_ball_state(self.ball)
+        
+        for player in self.players:
+            player.play()
+            self.strategy_output.append(player.goal())
 
-        players = [Player(Go_to_Position(robot_id[0], 0.5, 0.5)),
-                   Player(Go_to_Ball(robot_id[1])),
-                   Player(Goalkeeper(robot_id[2]))]
-
-        for robot in range(number_of_robots):
-            target = players[robot].getTarget()
-            th = players[robot].getTh()
-            control_option = players[robot].getControl_Option()
-
-            Team.x[robot] = target[0]
-            Team.y[robot] = target[1]
-            Team.th[robot] = th
-            Team.control_option[robot] = control_option
+    def output(self):
+        output = self.strategy_output
+        self.strategy_output = []
+        return output
