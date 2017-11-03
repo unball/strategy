@@ -1,36 +1,38 @@
 import math
+from point import Point
 from control_options import *
-from ball import Ball
-from robots_position import *
 
 class Goalkeeper():
-    global x
-    global end_y
-    x = 0.60
-    y = 0
-    end_y = 0.16
-    control_option = control_options.position
 
-    def __init__(self): #Set target
-        self.x = x
+    def __init__(self):
+        self.ball_pos = Point()
+        self.control_option = control_options.pose_line
         self.th = math.pi / 2
-        #y_b = Ball.y
-        #y_goalkeeper = Robot_Position.y[robot_id]
+        self.end_y = 0.16
+        self.goal_x = 0.60
+        self.position = Point(0, 0)
 
-        # if (y_b > y_goalkeeper) and (y_b < end_y):
-        #     self.y = y_b
-        # if (y_b < y_goalkeeper) and (y_b > (-1) * end_y):
-        #     self.y = y_b
-        # if y_b > end_y:
-        #     self.y = end_y
-        # if y_b < (-1) * end_y:
-        #     self.y = (-1) * end_y
+    def set_robot_state(self, robot_point, robot_th):
+        self.position = robot_point
 
-    def getTarget(self):
-        return self.x, self.y
+    def set_ball_position(self, ball_pos):
+        self.ball_pos = ball_pos
 
-    def getTh(self):
-        return self.th
+    def enemy_state(self, enemy_pos):
+        pass
 
-    def getControl_Option(self):
-        return self.control_option
+    def get_strategy_output(self):
+        return [self.goal.x, self.goal.y, self.th, 0, 0, 0, 0, self.control_option]
+
+    def calculate_goal(self):
+        if self.position.y <= self.ball_pos.y <= self.end_y:
+            self.goal = Point(self.goal_x, self.ball_pos.y)
+
+        if self.ball_pos.y > self.end_y:
+            self.goal.y = self.end_y
+
+        if (-1) * self.end_y <= self.ball_pos.y <= self.position.y:
+            self.goal.y = self.ball_pos.y
+
+        if self.ball_pos.y < (-1) * self.end_y:
+            self.goal.y = (-1) * self.end_y

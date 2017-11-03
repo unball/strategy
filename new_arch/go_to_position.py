@@ -1,19 +1,26 @@
 from control_options import *
-from ball import *
+from point import Point
 
-class Go_to_Position():
-    th = 0
-    control_option = control_options.pose
+class GoToPosition():
+    def __init__(self):
+        self.ball_pos = Point()
+        self.control_option = control_options.position
+        self.th = 0
 
-    def __init__(self, robot_id, x, y):
-        self.x = x
-        self.y = y
+    def set_robot_state(self, robot_point, robot_th):
+        pass
 
-    def getTarget(self):
-        return self.x, self.y
+    def set_ball_position(self, ball_pos):
+        self.ball_pos = ball_pos
 
-    def getTh(self):
-        return self.th
+    def enemy_state(self, enemy_pos):
+        pass
 
-    def getControl_Option(self):
-        return self.control_option
+    def get_strategy_output(self):
+        return [self.goal.x, self.goal.y, 0, 0, 0, 0, 0, self.control_option]
+
+    def calculate_goal(self):
+        x = 0
+        y = 0
+
+        self.goal = Point(x, y)
