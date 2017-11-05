@@ -20,7 +20,7 @@ class Player(object):
     def printValues(self):
         print self.target, self.th, self.control_option
 
-    def set_own_state(self, x, y, th, robot_id:
+    def set_own_state(self, x, y, th, robot_id):
         self.pos = Point(x, y)
         self.th = th
         self.robot_id = robot_id
