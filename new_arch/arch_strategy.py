@@ -7,6 +7,8 @@ from strategy.msg import strategy_output_msg
 from player import *
 from team import *
 from point import Point
+from std_msgs.msg import String
+from field_side import *
 
 number_of_robots = 3
 paused = False
@@ -35,12 +37,19 @@ def keyboardListener(data):
     if data.key == 114:
         paused = False
 
+def fieldSideListener(field_side):
+    if (field_side.data == "Right"):
+        FieldSide.side = Side.RIGHT
+    elif (field_side.data == "Left"):
+        FieldSide.side = Side.LEFT
+
 def start(team):
     global output_msg
     pub = rospy.Publisher('strategy_output_topic', strategy_output_msg, queue_size=1)
     rospy.init_node('strategy')
     rospy.Subscriber('measurement_system_topic', measurement_msg, callback, team)
     rospy.Subscriber('keyboard_topic', KeyboardMessage, keyboardListener)
+    rospy.Subscriber('field_side_topic', String, fieldSideListener)
     rate = rospy.Rate(30)
     output_msg = strategy_output_msg()
     try:
