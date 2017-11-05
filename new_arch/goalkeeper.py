@@ -12,7 +12,7 @@ class Goalkeeper():
         self.goal_x = 0.60
         self.position = Point(0, 0)
 
-    def set_robot_state(self, robot_point, robot_th):
+    def set_robot_state(self, robot_point, robot_th, robot_id):
         self.position = robot_point
 
     def set_ball_position(self, ball_pos):

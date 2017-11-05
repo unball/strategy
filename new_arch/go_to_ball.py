@@ -7,7 +7,7 @@ class GoToBall():
         self.control_option = control_options.position
         self.th = 0
 
-    def set_robot_state(self, robot_point, robot_th):
+    def set_robot_state(self, robot_point, robot_th, robot_id):
         pass
 
     def set_ball_position(self, ball_pos):

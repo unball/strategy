@@ -8,7 +8,7 @@ number_of_robots = 3
 
 class Team():
     def __init__(self):
-        self.players = [Player(GoToPosition()), Player(GoToBall()), Player(Goalkeeper())]
+        self.players = [Player(Goalkeeper()), Player(Goalkeeper()), Player(Goalkeeper())]
         self.ball = Point()
         self.robots_pos_x = []
         self.robots_pos_y = []
@@ -27,8 +27,9 @@ class Team():
 
     def run(self):
         for player, pos_x, pos_y, th in zip(self.players, self.robots_pos_x,
-                                        self.robots_pos_y, self.robots_th):
-            player.set_own_state(pos_x, pos_y, th)
+                                            self.robots_pos_y, self.robots_th):
+            robot_id = self.players.index(player)
+            player.set_own_state(pos_x, pos_y, th, robot_id)
             player.set_ball_state(self.ball)
 
         for player in self.players:
