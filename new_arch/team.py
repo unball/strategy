@@ -36,7 +36,15 @@ class Team():
             player.play()
             self.strategy_output.append(player.goal())
 
+    def stop(self):
+        for player, pos_x, pos_y, th in zip(self.players, self.robots_pos_x,
+                                            self.robots_pos_y, self.robots_th):
+            robot_id = self.players.index(player)
+            player.set_own_state(pos_x, pos_y, th, robot_id)
+            self.strategy_output.append(player.stop())
+
     def output(self):
         output = self.strategy_output
         self.strategy_output = []
         return output
+

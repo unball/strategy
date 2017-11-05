@@ -1,4 +1,5 @@
 from point import Point
+from control_options import *
 
 class Player(object):
     target = [0, 0]
@@ -35,3 +36,6 @@ class Player(object):
 
     def goal(self):
         return self.strategy.get_strategy_output()
+
+    def stop(self):
+        return [self.pos.x, self.pos.y, self.th, 0, 0, 0, 0, control_options.direct_speeds]
