@@ -14,9 +14,12 @@ class Goalkeeper(AbstractStrategy):
         return [self.goal.x, self.goal.y, self.target_th, 0, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
+        if self.fieldSide == Side.RIGHT:
+            self.goal_x = 0.60
+
         if self.fieldSide == Side.LEFT:
-            self.goal_x *= -1
-    
+            self.goal_x = -0.60
+
         if self.position.y <= self.ball_pos.y <= self.end_y:
             self.goal = Point(self.goal_x, self.ball_pos.y)
 
