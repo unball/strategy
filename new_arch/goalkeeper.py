@@ -1,5 +1,4 @@
 from abstract_strategy import *
-from point import Point
 
 class Goalkeeper(AbstractStrategy):
 
