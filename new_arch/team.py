@@ -1,10 +1,10 @@
 from player import *
-from goalkeeper import *
-from go_to_ball import *
-from go_to_position import *
-from go_to_goal import *
-from circumvent_ball import CircumventBall
-from circumvent_ball import Direction
+from behaviours.go_to_ball import *
+from behaviours.go_to_position import *
+from behaviours.go_to_goal import *
+from behaviours.goalkeeper import *
+from behaviours.circumvent_ball import CircumventBall
+from behaviours.circumvent_ball import Direction
 
 number_of_robots = 3
 

@@ -1,13 +1,13 @@
 from point import Point
 
 class Player(object):
-    target = [0, 0]
-    th = 0
-    control_option = 0
-
     def __init__(self, strategy):
         self.pos = Point(0, 0)
         self.strategy = strategy
+        self.target = [0, 0]
+        self.th = 0
+        self.control_option = 0
+
     def getTarget(self):
         return self.target
 
@@ -38,3 +38,7 @@ class Player(object):
 
     def stop(self):
         return self.strategy.stop()
+
+    @property
+    def Strategy(self, new_strategy):
+        self.strategy = new_strategy
