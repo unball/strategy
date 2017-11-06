@@ -4,12 +4,13 @@ from go_to_ball import *
 from go_to_position import *
 from go_to_goal import *
 from circumvent_ball import CircumventBall
+from circumvent_ball import Direction
 
 number_of_robots = 3
 
 class Team():
     def __init__(self):
-        self.players = [Player(CircumventBall()), Player(Goalkeeper()), Player(GoToBall())]
+        self.players = [Player(CircumventBall(Direction.COUNTER_CLOCKWISE)), Player(Goalkeeper()), Player(GoToBall())]
         self.ball = Point(0, 0)
         self.robots_pos_x = []
         self.robots_pos_y = []
