@@ -10,10 +10,12 @@ class KickerPlayer(Player):
     def updateStrategy(self):
         angle_ball_to_player = (self.ball - self.pos).angle
         if fabs(angle_ball_to_player - self.TargetConeAngle) < 45 and self.strategy.name != 'GoToPosition':
-            print('position')
+            pass
+            #print('position')
             #self.strategy = GoToPosition()
         elif self.strategy.name != 'Circumvent':
-            print('circ')
+            pass
+            #print('circ')
             #self.strategy = CircumventBall(Direction.COUNTER_CLOCKWISE)
 
     @property

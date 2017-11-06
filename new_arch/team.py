@@ -1,6 +1,6 @@
 from point import Point
-from KickerPlayer import KickerPlayer
-from GoalkeeperPlayer import GoalkeeperPlayer
+from Players.KickerPlayer import KickerPlayer
+from Players.GoalkeeperPlayer import GoalkeeperPlayer
 
 number_of_robots = 3
 
