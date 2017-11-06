@@ -22,3 +22,7 @@ class AbstractStrategy():
     @property
     def fieldSide(self):
         return FieldSide.side
+
+    @property
+    def KEYBOARD_EVENT(self):
+        return Keyboard.EVENT
