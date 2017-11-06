@@ -3,7 +3,7 @@ from abstract_strategy import *
 class GoToBall(AbstractStrategy):
     def __init__(self):
         self.ball_pos = Point()
-        self.control_option = control_options.position
+        self.control_option = control_options.pose_line
         self.th = 0
 
     def get_strategy_output(self):

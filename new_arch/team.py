@@ -3,12 +3,13 @@ from goalkeeper import *
 from go_to_ball import *
 from go_to_position import *
 from point import Point
+from go_to_goal import *
 
 number_of_robots = 3
 
 class Team():
     def __init__(self):
-        self.players = [Player(Goalkeeper()), Player(Goalkeeper()), Player(Goalkeeper())]
+        self.players = [Player(GoToBall()), Player(Goalkeeper()), Player(GoToBall())]
         self.ball = Point()
         self.robots_pos_x = []
         self.robots_pos_y = []
