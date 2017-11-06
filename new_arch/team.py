@@ -9,7 +9,7 @@ number_of_robots = 3
 
 class Team():
     def __init__(self):
-        self.players = [Player(CircumventBall()), Player(Goalkeeper()), Player(GoToBall())]
+        self.players = [Player(GoToPosition()), Player(Goalkeeper()), Player(GoToBall())]
         self.ball = Point(0, 0)
         self.robots_pos_x = []
         self.robots_pos_y = []
@@ -48,4 +48,3 @@ class Team():
         output = self.strategy_output
         self.strategy_output = []
         return output
-

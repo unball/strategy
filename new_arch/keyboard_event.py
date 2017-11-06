@@ -1,4 +1,2 @@
-from enum import Enum
-
-class Keyboard(Enum):
+class Keyboard():
     EVENT = 0

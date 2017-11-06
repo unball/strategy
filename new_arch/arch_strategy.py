@@ -7,6 +7,7 @@ from strategy.msg import strategy_output_msg
 from player import *
 from team import *
 from std_msgs.msg import String
+from std_msgs.msg import Char
 from field_side import *
 from keyboard_event import *
 from point import Point
@@ -46,7 +47,11 @@ def fieldSideListener(field_side):
         FieldSide.side = Side.LEFT
 
 def keyboardEventListener(keyboard_event):
-    Keyboard.EVENT = keyboard_event
+    buffer_ = keyboard_event.data
+    if buffer_ in xrange(0, 5):
+        Keyboard.EVENT = buffer_
+    else:
+        Keyboard.EVENT = 0
 
 def start(team):
     global output_msg
@@ -55,7 +60,7 @@ def start(team):
     rospy.Subscriber('measurement_system_topic', measurement_msg, callback, team)
     rospy.Subscriber('keyboard_topic', KeyboardMessage, keyboardListener)
     rospy.Subscriber('field_side_topic', String, fieldSideListener)
-    rospy.Subscriber('keyboard_event', String, keyboardEventListener)
+    rospy.Subscriber('keyboard_event_topic', Char, keyboardEventListener)
     rate = rospy.Rate(30)
     output_msg = strategy_output_msg()
     try:

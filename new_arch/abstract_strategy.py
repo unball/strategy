@@ -2,6 +2,7 @@ import math
 from point import Point
 from control_options import *
 from field_side import *
+from keyboard_event import *
 
 class AbstractStrategy():
 
