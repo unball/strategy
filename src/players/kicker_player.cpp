@@ -1,4 +1,3 @@
-
 /**
  * @file   kicker_player.cpp
  * @author Izabella Thais Oliveira Gomes
