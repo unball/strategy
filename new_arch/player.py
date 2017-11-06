@@ -5,6 +5,7 @@ from behaviours.go_to_ball import *
 from behaviours.go_to_position import *
 from behaviours.go_to_goal import *
 from behaviours.goalkeeper import *
+from field_side import *
 
 class Player(object):
     def __init__(self):
@@ -13,6 +14,7 @@ class Player(object):
         self.target = [0, 0]
         self.th = 0
         self.control_option = 0
+        self.ball = Point(0, 0)
 
     def getTarget(self):
         return self.target
@@ -48,3 +50,7 @@ class Player(object):
 
     def updateStrategy(self):
         pass
+
+    @property
+    def fieldSide(self):
+        return FieldSide.side

@@ -13,6 +13,7 @@ class CircumventBall(AbstractStrategy):
         self.th = 0
         self.position = Point(0, 0)
         self.direction = direction
+        self.name = 'Circumvent'
 
     def get_strategy_output(self):
         return [self.goal.x, self.goal.y, 0, 0, 0, 0, 0, self.control_option]
