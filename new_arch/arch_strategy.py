@@ -48,7 +48,7 @@ def fieldSideListener(field_side):
 
 def keyboardEventListener(keyboard_event):
     buffer_ = keyboard_event.data
-    if buffer_ in xrange(0, 5):
+    if buffer_ in xrange(0, 6):
         Keyboard.EVENT = buffer_
     else:
         Keyboard.EVENT = 0
