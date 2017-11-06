@@ -6,7 +6,7 @@ class Player(object):
     control_option = 0
 
     def __init__(self, strategy):
-        self.pos = Point()
+        self.pos = Point(0, 0)
         self.strategy = strategy
     def getTarget(self):
         return self.target

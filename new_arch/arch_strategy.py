@@ -6,9 +6,9 @@ from strategy.msg import KeyboardMessage
 from strategy.msg import strategy_output_msg
 from player import *
 from team import *
-from point import Point
 from std_msgs.msg import String
 from field_side import *
+from point import Point
 
 number_of_robots = 3
 paused = False
