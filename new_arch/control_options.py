@@ -5,4 +5,3 @@ class control_options:
     angular_pose= 4
     direct_speeds = 5
     pose_line = 6
-    
