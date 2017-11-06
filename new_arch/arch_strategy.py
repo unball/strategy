@@ -14,9 +14,9 @@ number_of_robots = 3
 paused = False
 
 def callback(data, team):
-    ball = Point(data.ball_x, data.ball_y)
+    ball = Point(data.ball_x_pred, data.ball_y_pred)
     team.set_params(ball, data.x, data.y, data.th)
-    
+
 def assembly_msg(output):
     aux = strategy_output_msg()
     for i in xrange(len(output)):
@@ -64,7 +64,7 @@ def start(team):
             rate.sleep()
     except rospy.ROSInterruptException:
         exit(1)
-            
+
 
 if __name__ == '__main__':
     print "strategy_node started"
