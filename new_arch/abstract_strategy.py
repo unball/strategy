@@ -10,6 +10,7 @@ class AbstractStrategy():
         self.position = robot_point
         self.th = robot_th
         self.id = robot_id
+        self.name = 'Abstract'
 
     def set_ball_position(self, ball_pos):
         self.ball_pos = ball_pos

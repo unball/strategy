@@ -17,7 +17,7 @@ number_of_robots = 3
 paused = False
 
 def callback(data, team):
-    ball = Point(data.ball_x_pred, data.ball_y_pred)
+    ball = Point(data.ball_x, data.ball_y)
     team.set_params(ball, data.x, data.y, data.th)
 
 def assembly_msg(output):

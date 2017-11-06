@@ -1,13 +1,21 @@
 from point import Point
+from behaviours.circumvent_ball import CircumventBall
+from behaviours.circumvent_ball import Direction
+from behaviours.go_to_ball import *
+from behaviours.go_to_position import *
+from behaviours.go_to_goal import *
+from behaviours.goalkeeper import *
+from field_side import *
 
 class Player(object):
-    target = [0, 0]
-    th = 0
-    control_option = 0
-
-    def __init__(self, strategy):
+    def __init__(self):
         self.pos = Point(0, 0)
-        self.strategy = strategy
+        self.strategy = None
+        self.target = [0, 0]
+        self.th = 0
+        self.control_option = 0
+        self.ball = Point(0, 0)
+
     def getTarget(self):
         return self.target
 
@@ -31,6 +39,7 @@ class Player(object):
         self.strategy.set_ball_position(ball)
 
     def play(self):
+        self.updateStrategy()
         self.strategy.calculate_goal()
 
     def goal(self):
@@ -38,3 +47,10 @@ class Player(object):
 
     def stop(self):
         return self.strategy.stop()
+
+    def updateStrategy(self):
+        pass
+
+    @property
+    def fieldSide(self):
+        return FieldSide.side
