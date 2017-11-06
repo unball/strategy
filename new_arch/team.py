@@ -1,16 +1,12 @@
-from player import *
-from behaviours.go_to_ball import *
-from behaviours.go_to_position import *
-from behaviours.go_to_goal import *
-from behaviours.goalkeeper import *
-from behaviours.circumvent_ball import CircumventBall
-from behaviours.circumvent_ball import Direction
+from point import Point
+from KickerPlayer import KickerPlayer
+from GoalkeeperPlayer import GoalkeeperPlayer
 
 number_of_robots = 3
 
 class Team():
     def __init__(self):
-        self.players = [Player(CircumventBall(Direction.COUNTER_CLOCKWISE)), Player(Goalkeeper()), Player(GoToBall())]
+        self.players = [KickerPlayer(), GoalkeeperPlayer(), KickerPlayer()]
         self.ball = Point(0, 0)
         self.robots_pos_x = []
         self.robots_pos_y = []

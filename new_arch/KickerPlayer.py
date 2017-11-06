@@ -1,6 +1,9 @@
-from player import Player
+from player import *
 
-class KickerPlayer(object):
-    def __init__(self, strategy):
+class KickerPlayer(Player):
+    def __init__(self):
         super(KickerPlayer, self).__init__()
-        self.strategy = strategy
+        self.strategy = CircumventBall(Direction.COUNTER_CLOCKWISE)
+
+    def updateStrategy(self):
+        pass
