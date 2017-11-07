@@ -4,7 +4,7 @@ from measurement_system.msg import measurement_msg
 from communication.msg import target_positions_msg
 from strategy.msg import KeyboardMessage
 from strategy.msg import strategy_output_msg
-from player import *
+from Players.player import *
 from team import *
 from std_msgs.msg import String
 from std_msgs.msg import Char
