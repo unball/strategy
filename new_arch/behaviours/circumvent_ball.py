@@ -20,7 +20,7 @@ class CircumventBall(AbstractStrategy):
 
     def calculate_goal(self):
         diff_angle = (self.ball_pos - self.position).angle
-        radius = 0.3
+        radius = 0.5
         target = Point.polar(diff_angle + self.dTh, radius)
         self.goal = target + self.ball_pos
 
