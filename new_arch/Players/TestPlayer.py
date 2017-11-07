@@ -14,12 +14,5 @@ class TestPlayer(Player):
         pass
 
     @property
-    def GoalCenter(self):
-        if self.fieldSide == Side.RIGHT:
-            return Point(0.75, 0)
-        else:
-            return Point(-0.75, 0)
-
-    @property
     def TargetConeAngle(self):
         return (self.GoalCenter - self.ball).angle

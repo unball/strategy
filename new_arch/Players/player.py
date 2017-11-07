@@ -6,6 +6,7 @@ from behaviours.go_to_position import *
 from behaviours.go_to_goal import *
 from behaviours.goalkeeper import *
 from behaviours.control_test import *
+from behaviours.look_to_target import *
 from field_side import *
 
 class Player(object):
@@ -55,3 +56,10 @@ class Player(object):
     @property
     def fieldSide(self):
         return FieldSide.side
+
+    @property
+    def GoalCenter(self):
+        if self.fieldSide == Side.RIGHT:
+            return Point(-0.75, 0)
+        else:
+            return Point(0.75, 0)
