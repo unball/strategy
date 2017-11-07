@@ -5,6 +5,7 @@ from behaviours.go_to_ball import *
 from behaviours.go_to_position import *
 from behaviours.go_to_goal import *
 from behaviours.goalkeeper import *
+from behaviours.control_test import *
 from field_side import *
 
 class Player(object):
