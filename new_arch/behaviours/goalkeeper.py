@@ -28,4 +28,4 @@ class Goalkeeper(AbstractStrategy):
             print "-------------------"
 
         if self.fieldSide == Side.LEFT: #TODO implement the same logic to the LEFT side as the RIGHT side of the field
-        pass
+            pass
