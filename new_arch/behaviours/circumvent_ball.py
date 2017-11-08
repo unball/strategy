@@ -22,6 +22,9 @@ class CircumventBall(AbstractStrategy):
         target = Point.polar(diff_angle + self.dTh, self.radius)
         self.goal = target + self.ball_pos
 
+    def changeDirection(self, newDirection):
+        self.direction = newDirection
+
     @property
     def dTh(self):
         if self.direction == Direction.CLOCKWISE:

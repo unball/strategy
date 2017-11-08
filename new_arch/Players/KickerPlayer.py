@@ -8,17 +8,16 @@ class KickerPlayer(Player):
         self.circumventStrategy = CircumventBall(radius=0.2)
         self.goToGoalStrategy = GoToPosition(self.GoalCenter)
         self.strategy = self.circumventStrategy
-        self.counter = 0
 
     def updateStrategy(self):
         angle_ball_to_player = (self.ball - self.pos).angle
-        self.counter = self.counter + 1
         if self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 30, 0.5):
-            if self.isLooking(): #TODO: ONLY WORKING WITH 0 DEGREES
+            if self.isLooking():
                 self.strategy = self.goToGoalStrategy                
             else:
-                self.strategy = LookToTarget(self.ball) #TODO: FIX
+                self.strategy = LookToTarget(self.ball)
         elif fabs(self.ball.distance_to(self.pos)) <= 0.3:
+            self.circumventStrategy.changeDirection(self.getDirection())
             self.strategy = self.circumventStrategy
         else:
             self.strategy = GoToPosition(self.ball)
@@ -33,3 +32,38 @@ class KickerPlayer(Player):
     @property
     def TargetConeAngle(self):
         return (self.GoalCenter - self.ball).angle
+
+    def getDirection(self):
+        direction_vec2 = self.ball - self.GoalCenter
+        direction_quadrant = Point(direction_vec2.x, direction_vec2.y).Quadrant
+                
+        difference = self.pos - self.ball
+        angle_quadrant = Point(difference.x, difference.y).Quadrant
+
+        if direction_quadrant == 2 and angle_quadrant == 3:
+            return Direction.CLOCKWISE
+        elif direction_quadrant == 2 and angle_quadrant == 1:
+            return Direction.COUNTER_CLOCKWISE
+        elif direction_quadrant == 3 and angle_quadrant == 4:
+            return Direction.CLOCKWISE
+        elif direction_quadrant == 3 and angle_quadrant == 2:
+            return Direction.COUNTER_CLOCKWISE
+        elif direction_quadrant == 4 and angle_quadrant == 1:
+            return Direction.CLOCKWISE
+        elif direction_quadrant == 4 and angle_quadrant == 3:
+            return Direction.COUNTER_CLOCKWISE
+        elif direction_quadrant == 1 and angle_quadrant == 2:
+            return Direction.CLOCKWISE
+        elif direction_quadrant == 1 and angle_quadrant == 4:
+            return Direction.COUNTER_CLOCKWISE
+        elif (difference.angle - direction_vec2.angle) <= 0:
+            return Direction.COUNTER_CLOCKWISE
+
+        return Direction.CLOCKWISE
+
+    def reduce_angle(self,angle):
+        while angle <= -180:
+            angle += 2*180;
+        while angle > 180:
+            angle -= 2*180
+        return angle;
