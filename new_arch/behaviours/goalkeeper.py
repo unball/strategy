@@ -1,5 +1,8 @@
 from abstract_strategy import *
 
+def dislocate(original_point, dist_dislocated):
+    return Point(original_point.X + dist_dislocated, original_point.Y)
+
 class Goalkeeper(AbstractStrategy):
 
     def __init__(self):
@@ -9,23 +12,23 @@ class Goalkeeper(AbstractStrategy):
         self.end_y = 0.16
         self.position = Point(0, 0)
         self.goal = Point(0, 0)
-        self.radius = 0.15
+        self.radius = 0.5
+        self.circ_center_x = 1.1
 
     def get_strategy_output(self):
         return [self.goal.X, self.goal.Y, self.target_th, 0, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
         if self.fieldSide == Side.RIGHT:
-            fakeball_x = math.fabs(self.ball_pos.X)
-            desloc_x = -0.7
-            fakeball_x = fakeball_x + desloc_x
+            dislocated_ball = dislocate(self.ball_pos, -self.circ_center_x)
+            th = math.atan2(dislocated_ball.Y, dislocated_ball.X)
+            aux_target = Point(self.radius * math.cos(th), self.radius * math.sin(th))
+            self.goal = dislocate(aux_target, self.circ_center_x)
+            print th
 
-            th = math.atan2(self.ball_pos.Y, fakeball_x)
-            self.goal = Point(self.radius * math.cos(th) - desloc_x, self.radius * math.sin(th))
-
-            print fakeball_x #TODO fix for x < 0 (ircle center in the opposite goal)
-            print self.ball_pos.X
-            print "-------------------"
-
-        if self.fieldSide == Side.LEFT: #TODO implement the same logic to the LEFT side as the RIGHT side of the field
-            pass
+        if self.fieldSide == Side.LEFT:
+            dislocated_ball = dislocate(self.ball_pos, self.circ_center_x)
+            th = math.atan2(dislocated_ball.Y, dislocated_ball.X)
+            aux_target = Point(self.radius * math.cos(th), self.radius * math.sin(th))
+            self.goal = dislocate(aux_target, -self.circ_center_x)
+            print th

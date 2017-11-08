@@ -5,7 +5,7 @@ from Players.TestPlayer import TestPlayer
 
 class Team():
     def __init__(self):
-        self.players = [KickerPlayer(), GoalkeeperPlayer(), GoalkeeperPlayer()]
+        self.players = [GoalkeeperPlayer(), GoalkeeperPlayer(), GoalkeeperPlayer()]
         self.ball = Point(0, 0)
         self.robots_pos_x = []
         self.robots_pos_y = []
