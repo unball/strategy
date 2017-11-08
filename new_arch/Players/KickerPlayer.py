@@ -9,17 +9,18 @@ class KickerPlayer(Player):
         self.goToGoalStrategy = GoToPosition(self.GoalCenter)
         self.strategy = self.circumventStrategy
         self.lockCone = False
-        self.lockCircle = False
+        self.lockLooking = False
 
     def updateStrategy(self):
         angle_ball_to_player = (self.ball - self.pos).angle
         if not self.isLocked:
             if self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 30, 0.3):
-                if self.isLooking():
+                if self.isLooking(tolerance = 10):
                     self.strategy = self.goToGoalStrategy
                     self.lockCone = True
                 else:
                     self.strategy = LookToTarget(self.ball)
+                    self.lockLooking = True
             elif fabs(self.ball.distance_to(self.pos)) <= 0.5:
                 self.circumventStrategy.changeDirection(self.getDirection())
                 self.strategy = self.circumventStrategy
@@ -27,17 +28,19 @@ class KickerPlayer(Player):
                 self.strategy = GoToPosition(self.ball)
         if not self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 45, 0.3):
             self.lockCone = False
+        if self.isLooking(tolerance = 30):
+            self.lockLooking = False
 
-    def isLooking(self):
+    def isLooking(self, tolerance = 20):
         difference_angle = (self.ball - self.pos).angle*pi/180 - self.th
-        return fabs(difference_angle) < 20*pi/180 or fabs(difference_angle) > pi - 20*pi/180
+        return fabs(difference_angle) < tolerance*pi/180 or fabs(difference_angle) > pi - tolerance*pi/180
 
     def isInsideConeOfRadiusAndMaxDistance(self, angle_ball_to_player, angle = 30, maxDistance = 0.5):
         return fabs(angle_ball_to_player - self.TargetConeAngle) < angle and fabs(self.pos.distance_to(self.ball)) <= maxDistance
 
     @property
     def isLocked(self):
-        return self.lockCone or self.lockCircle
+        return self.lockCone or self.lockLooking
 
     @property
     def TargetConeAngle(self):
