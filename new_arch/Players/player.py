@@ -6,6 +6,7 @@ from behaviours.go_to_position import *
 from behaviours.go_to_goal import *
 from behaviours.goalkeeper import *
 from behaviours.control_test import *
+from behaviours.SquareCircumventBehaviour import *
 from behaviours.look_to_target import *
 from field_side import *
 
