@@ -8,28 +8,75 @@ class KickerPlayer(Player):
         self.circumventStrategy = CircumventBall(radius=0.2)
         self.goToGoalStrategy = GoToPosition(self.GoalCenter)
         self.strategy = self.circumventStrategy
-        self.counter = 0
+        self.lockCone = False
+        self.lockLooking = False
 
     def updateStrategy(self):
         angle_ball_to_player = (self.ball - self.pos).angle
-        self.counter = self.counter + 1
-        if self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 30, 0.5):
-            if self.isLooking(): #TODO: ONLY WORKING WITH 0 DEGREES
-                self.strategy = self.goToGoalStrategy                
+        if not self.isLocked:
+            if self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 30, 0.3):
+                if self.isLooking(tolerance = 10):
+                    self.strategy = self.goToGoalStrategy
+                    self.lockCone = True
+                else:
+                    self.strategy = LookToTarget(self.ball)
+                    self.lockLooking = True
+            elif fabs(self.ball.distance_to(self.pos)) <= 0.5:
+                self.circumventStrategy.changeDirection(self.getDirection())
+                self.strategy = self.circumventStrategy
             else:
-                self.strategy = LookToTarget(self.ball) #TODO: FIX
-        elif fabs(self.ball.distance_to(self.pos)) <= 0.3:
-            self.strategy = self.circumventStrategy
-        else:
-            self.strategy = GoToPosition(self.ball)
+                self.strategy = GoToPosition(self.ball)
+        if not self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 45, 0.3):
+            self.lockCone = False
+        if self.isLooking(tolerance = 30):
+            self.lockLooking = False
 
-    def isLooking(self):
+    def isLooking(self, tolerance = 20):
         difference_angle = (self.ball - self.pos).angle*pi/180 - self.th
-        return fabs(difference_angle) < pi/8
+        return fabs(difference_angle) < tolerance*pi/180 or fabs(difference_angle) > pi - tolerance*pi/180
 
-    def isInsideConeOfRadiusAndMaxDistance(self, angle_ball_to_player, radius = 30, maxDistance = 0.5):
-        return fabs(angle_ball_to_player - self.TargetConeAngle) < radius and fabs(self.pos.distance_to(self.ball)) <= maxDistance
+    def isInsideConeOfRadiusAndMaxDistance(self, angle_ball_to_player, angle = 30, maxDistance = 0.5):
+        return fabs(angle_ball_to_player - self.TargetConeAngle) < angle and fabs(self.pos.distance_to(self.ball)) <= maxDistance
+
+    @property
+    def isLocked(self):
+        return self.lockCone or self.lockLooking
 
     @property
     def TargetConeAngle(self):
         return (self.GoalCenter - self.ball).angle
+
+    def getDirection(self):
+        direction_vec2 = self.ball - self.GoalCenter
+        direction_quadrant = Point(direction_vec2.x, direction_vec2.y).Quadrant
+                
+        difference = self.pos - self.ball
+        angle_quadrant = Point(difference.x, difference.y).Quadrant
+
+        if direction_quadrant == 2 and angle_quadrant == 3:
+            return Direction.CLOCKWISE
+        elif direction_quadrant == 2 and angle_quadrant == 1:
+            return Direction.COUNTER_CLOCKWISE
+        elif direction_quadrant == 3 and angle_quadrant == 4:
+            return Direction.CLOCKWISE
+        elif direction_quadrant == 3 and angle_quadrant == 2:
+            return Direction.COUNTER_CLOCKWISE
+        elif direction_quadrant == 4 and angle_quadrant == 1:
+            return Direction.CLOCKWISE
+        elif direction_quadrant == 4 and angle_quadrant == 3:
+            return Direction.COUNTER_CLOCKWISE
+        elif direction_quadrant == 1 and angle_quadrant == 2:
+            return Direction.CLOCKWISE
+        elif direction_quadrant == 1 and angle_quadrant == 4:
+            return Direction.COUNTER_CLOCKWISE
+        elif (difference.angle - direction_vec2.angle) <= 0:
+            return Direction.COUNTER_CLOCKWISE
+
+        return Direction.CLOCKWISE
+
+    def reduce_angle(self,angle):
+        while angle <= -180:
+            angle += 2*180;
+        while angle > 180:
+            angle -= 2*180
+        return angle;
