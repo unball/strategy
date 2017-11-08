@@ -8,26 +8,36 @@ class KickerPlayer(Player):
         self.circumventStrategy = CircumventBall(radius=0.2)
         self.goToGoalStrategy = GoToPosition(self.GoalCenter)
         self.strategy = self.circumventStrategy
+        self.lockCone = False
+        self.lockCircle = False
 
     def updateStrategy(self):
         angle_ball_to_player = (self.ball - self.pos).angle
-        if self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 30, 0.5):
-            if self.isLooking():
-                self.strategy = self.goToGoalStrategy                
+        if not self.isLocked:
+            if self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 30, 0.3):
+                if self.isLooking():
+                    self.strategy = self.goToGoalStrategy
+                    self.lockCone = True
+                else:
+                    self.strategy = LookToTarget(self.ball)
+            elif fabs(self.ball.distance_to(self.pos)) <= 0.5:
+                self.circumventStrategy.changeDirection(self.getDirection())
+                self.strategy = self.circumventStrategy
             else:
-                self.strategy = LookToTarget(self.ball)
-        elif fabs(self.ball.distance_to(self.pos)) <= 0.3:
-            self.circumventStrategy.changeDirection(self.getDirection())
-            self.strategy = self.circumventStrategy
-        else:
-            self.strategy = GoToPosition(self.ball)
+                self.strategy = GoToPosition(self.ball)
+        if not self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 45, 0.3):
+            self.lockCone = False
 
     def isLooking(self):
         difference_angle = (self.ball - self.pos).angle*pi/180 - self.th
-        return fabs(difference_angle) < pi/8
+        return fabs(difference_angle) < 20*pi/180 or fabs(difference_angle) > pi - 20*pi/180
 
-    def isInsideConeOfRadiusAndMaxDistance(self, angle_ball_to_player, radius = 30, maxDistance = 0.5):
-        return fabs(angle_ball_to_player - self.TargetConeAngle) < radius and fabs(self.pos.distance_to(self.ball)) <= maxDistance
+    def isInsideConeOfRadiusAndMaxDistance(self, angle_ball_to_player, angle = 30, maxDistance = 0.5):
+        return fabs(angle_ball_to_player - self.TargetConeAngle) < angle and fabs(self.pos.distance_to(self.ball)) <= maxDistance
+
+    @property
+    def isLocked(self):
+        return self.lockCone or self.lockCircle
 
     @property
     def TargetConeAngle(self):

@@ -62,6 +62,6 @@ class Player(object):
     @property
     def GoalCenter(self):
         if self.fieldSide == Side.RIGHT:
-            return Point(-0.75, 0)
+            return Point(-0.85, 0)
         else:
-            return Point(0.75, 0)
+            return Point(0.85, 0)
