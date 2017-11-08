@@ -9,24 +9,23 @@ class Goalkeeper(AbstractStrategy):
         self.end_y = 0.16
         self.position = Point(0, 0)
         self.goal = Point(0, 0)
+        self.radius = 0.15
 
     def get_strategy_output(self):
         return [self.goal.X, self.goal.Y, self.target_th, 0, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
         if self.fieldSide == Side.RIGHT:
-            self.goal.X = 0.60
-        if self.fieldSide == Side.LEFT:
-            self.goal.X = -0.60
+            fakeball_x = math.fabs(self.ball_pos.X)
+            desloc_x = -0.7
+            fakeball_x = fakeball_x + desloc_x
 
-        if self.position.Y <= self.ball_pos.Y <= self.end_y:
-            self.goal.Y = self.ball_pos.Y
+            th = math.atan2(self.ball_pos.Y, fakeball_x)
+            self.goal = Point(self.radius * math.cos(th) - desloc_x, self.radius * math.sin(th))
 
-        if self.ball_pos.Y > self.end_y:
-            self.goal.Y = self.end_y
+            print fakeball_x #TODO fix for x < 0 (ircle center in the opposite goal)
+            print self.ball_pos.X
+            print "-------------------"
 
-        if (-1) * self.end_y <= self.ball_pos.Y <= self.position.Y:
-            self.goal.Y = self.ball_pos.Y
-
-        if self.ball_pos.Y < (-1) * self.end_y:
-            self.goal.Y = (-1) * self.end_y
+        if self.fieldSide == Side.LEFT: #TODO implement the same logic to the LEFT side as the RIGHT side of the field
+        pass
