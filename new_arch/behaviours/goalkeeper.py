@@ -12,38 +12,49 @@ class Goalkeeper(AbstractStrategy):
         self.end_y = 0.16
         self.position = Point(0, 0)
         self.goal = Point(0, 0)
-        self.radius = 0.5
+        self.circ_radius = 0.5
         self.circ_center_x = 1.1
+        self.tolerance_radius = 0.1
         self.saturatorR = 2.5
         self.saturatorL = math.pi - self.saturatorR
 
     def get_strategy_output(self):
-        return [self.goal.X, self.goal.Y, self.target_th, 0, 0, 0, 0, self.control_option]
+        return [self.goal.X, self.goal.Y, self.target_th, self.u, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
-        if self.fieldSide == Side.RIGHT:
-            dislocated_ball = dislocate(self.ball_pos, -self.circ_center_x)
-            th = math.atan2(dislocated_ball.Y, dislocated_ball.X)
+        if math.sqrt((self.ball_pos.X - self.position.X)**2 + (self.ball_pos.Y - self.position.Y)**2) <= self.tolerance_radius:
+            if self.fieldSide == Side.RIGHT:
+                self.u = 3
 
-            if math.fabs(th) < self.saturatorR:
-                if self.goal.Y > 0:
-                    th = self.saturatorR
-                if self.goal.Y < 0:
-                    th = (-1) * self.saturatorR
+            if self.fieldSide == Side.LEFT:
+                self.u = 4
 
-            aux_target = Point(self.radius * math.cos(th), self.radius * math.sin(th))
-            self.goal = dislocate(aux_target, self.circ_center_x)
+        else:
+            if self.fieldSide == Side.RIGHT:
+                dislocated_ball = dislocate(self.ball_pos, -self.circ_center_x)
+                th = math.atan2(dislocated_ball.Y, dislocated_ball.X)
 
-        if self.fieldSide == Side.LEFT:
+                if math.fabs(th) < self.saturatorR:
+                    if self.goal.Y > 0:
+                        th = self.saturatorR
+                    if self.goal.Y < 0:
+                        th = (-1) * self.saturatorR
 
-            dislocated_ball = dislocate(self.ball_pos, self.circ_center_x)
-            th = math.atan2(dislocated_ball.Y, dislocated_ball.X)
+                aux_target = Point(self.circ_radius * math.cos(th), self.circ_radius * math.sin(th))
+                self.goal = dislocate(aux_target, self.circ_center_x)
+                self.u = 0
 
-            if math.fabs(th) > self.saturatorL:
-                if self.goal.Y > 0:
-                    th = self.saturatorL
-                if self.goal.Y < 0:
-                    th = (-1) * self.saturatorL
+            if self.fieldSide == Side.LEFT:
 
-            aux_target = Point(self.radius * math.cos(th), self.radius * math.sin(th))
-            self.goal = dislocate(aux_target, -self.circ_center_x)
+                dislocated_ball = dislocate(self.ball_pos, self.circ_center_x)
+                th = math.atan2(dislocated_ball.Y, dislocated_ball.X)
+
+                if math.fabs(th) > self.saturatorL:
+                    if self.goal.Y > 0:
+                        th = self.saturatorL
+                    if self.goal.Y < 0:
+                        th = (-1) * self.saturatorL
+
+                aux_target = Point(self.circ_radius * math.cos(th), self.circ_radius * math.sin(th))
+                self.goal = dislocate(aux_target, -self.circ_center_x)
+                self.u = 0
