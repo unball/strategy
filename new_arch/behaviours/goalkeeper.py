@@ -14,6 +14,8 @@ class Goalkeeper(AbstractStrategy):
         self.goal = Point(0, 0)
         self.radius = 0.5
         self.circ_center_x = 1.1
+        self.saturatorR = 2.5
+        self.saturatorL = math.pi - self.saturatorR
 
     def get_strategy_output(self):
         return [self.goal.X, self.goal.Y, self.target_th, 0, 0, 0, 0, self.control_option]
@@ -22,13 +24,26 @@ class Goalkeeper(AbstractStrategy):
         if self.fieldSide == Side.RIGHT:
             dislocated_ball = dislocate(self.ball_pos, -self.circ_center_x)
             th = math.atan2(dislocated_ball.Y, dislocated_ball.X)
+
+            if math.fabs(th) < self.saturatorR:
+                if self.goal.Y > 0:
+                    th = self.saturatorR
+                if self.goal.Y < 0:
+                    th = (-1) * self.saturatorR
+
             aux_target = Point(self.radius * math.cos(th), self.radius * math.sin(th))
             self.goal = dislocate(aux_target, self.circ_center_x)
-            print th
 
         if self.fieldSide == Side.LEFT:
+
             dislocated_ball = dislocate(self.ball_pos, self.circ_center_x)
             th = math.atan2(dislocated_ball.Y, dislocated_ball.X)
+
+            if math.fabs(th) > self.saturatorL:
+                if self.goal.Y > 0:
+                    th = self.saturatorL
+                if self.goal.Y < 0:
+                    th = (-1) * self.saturatorL
+
             aux_target = Point(self.radius * math.cos(th), self.radius * math.sin(th))
             self.goal = dislocate(aux_target, -self.circ_center_x)
-            print th
