@@ -31,7 +31,7 @@ class Team():
                                             self.robots_pos_y, self.robots_th):
             robot_id = self.players.index(player)
             player.set_own_state(pos_x, pos_y, th, robot_id)
-            player.set_ball_state(self.ball, Point(ball_x_wall, ball_y_wall))
+            player.set_ball_state(self.ball, Point(self.ball_x_wall, self.ball_y_wall))
 
         for player in self.players:
             player.play()

@@ -1,4 +1,5 @@
 from abstract_strategy import *
+from field_side import *
 
 def dislocate(original_point, dist_dislocated):
     return Point(original_point.X + dist_dislocated, original_point.Y)
@@ -21,7 +22,7 @@ class Goalkeeper(AbstractStrategy):
     def get_strategy_output(self):
         if self.is_ball_wall_in_goal_range():
             return [self.goal.X, self.goal.Y, self.target_th, self.u, 0, 0, 0, self.control_option]
-        return [self.goal.X, self.ball_wall_y, self.target_th, self.u, 0, 0, 0, self.control_option]
+        return [self.goal.X, self.ball_wall.y, self.target_th, self.u, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
         if math.sqrt((self.ball_pos.X - self.position.X)**2 + (self.ball_pos.Y - self.position.Y)**2) <= self.tolerance_radius:
@@ -67,7 +68,7 @@ class Goalkeeper(AbstractStrategy):
                 self.u = 0
 
     def is_ball_wall_in_goal_range(self):
-        if fieldSide.Side == Side.RIGHT:
+        if FieldSide.side == Side.RIGHT:
             if self.ball_wall.x >= 0.6 and (self.ball_wall.y < 0.2 and self.ball_wall.y > -0.2):
                 return True
         else:
