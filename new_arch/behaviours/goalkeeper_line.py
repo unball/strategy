@@ -10,8 +10,11 @@ class GoalkeeperLine(AbstractStrategy):
         self.position = Point(0, 0)
         self.goal = Point(0, 0)
         self.tolerance_radius = 0.1
+        self.ball_wall = Point(0, 0)
 
     def get_strategy_output(self):
+        if self.is_ball_wall_in_goal_range():
+            return [self.goal.X, self.ball_wall.y, self.target_th, self.u, 0, 0, 0, self.control_option]
         return [self.goal.X, self.goal.Y, self.target_th, self.u, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
@@ -47,3 +50,13 @@ class GoalkeeperLine(AbstractStrategy):
                 self.goal.Y = (-1) * self.end_y
                 
             self.u = 0
+
+
+    def is_ball_wall_in_goal_range(self):
+        if FieldSide.side == Side.RIGHT:
+            if self.ball_wall.x >= 0.6 and (self.ball_wall.y < 0.7 and self.ball_wall.y > -0.7):
+                return True
+        else:
+            if self.ball_wall.x <= -0.6 and (self.ball_wall.y < 0.7 and self.ball_wall.y > -0.7):
+                return True
+        return False

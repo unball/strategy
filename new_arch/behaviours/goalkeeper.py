@@ -19,6 +19,8 @@ class Goalkeeper(AbstractStrategy):
         self.saturatorL = math.pi - self.saturatorR
 
     def get_strategy_output(self):
+        if self.is_ball_wall_in_goal_range():
+            return [self.goal.X, self.ball_wall.y, self.target_th, self.u, 0, 0, 0, self.control_option]
         return [self.goal.X, self.goal.Y, self.target_th, self.u, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
@@ -63,3 +65,15 @@ class Goalkeeper(AbstractStrategy):
                 aux_target = Point(self.circ_radius * math.cos(th), self.circ_radius * math.sin(th))
                 self.goal = dislocate(aux_target, -self.circ_center_x)
                 self.u = 0
+
+    def is_ball_wall_in_goal_range(self):
+        print(self.ball_wall)
+        if FieldSide.side == Side.RIGHT:
+            if self.ball_wall.x >= 0.6 and (self.ball_wall.y < 0.7 and self.ball_wall.y > -0.7):
+                print('true')
+                return True
+        else:
+            if self.ball_wall.x <= -0.6 and (self.ball_wall.y < 0.7 and self.ball_wall.y > -0.7):
+                print('true')
+                return True
+        return False

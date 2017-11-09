@@ -20,6 +20,7 @@ class Player(object):
         self.control_option = 0
         self.ball = Point(0, 0)
         self.robot_id = 0
+        self.ball_walls = Point(0, 0)
 
     def getTarget(self):
         return self.target
@@ -39,9 +40,10 @@ class Player(object):
         self.robot_id = robot_id
         self.strategy.set_robot_state(self.pos, th, robot_id)
 
-    def set_ball_state(self, ball):
+    def set_ball_state(self, ball, ball_walls):
         self.ball = ball
-        self.strategy.set_ball_position(ball)
+        self.strategy.set_ball_position(ball, ball_walls)
+        self.ball_walls = ball_walls
 
     def play(self):
         self.updateStrategy()
