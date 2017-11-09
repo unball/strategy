@@ -8,7 +8,7 @@ class Direction(Enum):
 class CircumventBall(AbstractStrategy):
     def __init__(self, direction = Direction.CLOCKWISE, radius = 0.5):
         self.ball_pos = Point(0, 0)
-        self.control_option = control_options.pose_line
+        self.control_option = control_options.position
         self.th = 0
         self.position = Point(0, 0)
         self.direction = direction

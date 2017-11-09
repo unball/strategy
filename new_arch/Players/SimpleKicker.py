@@ -15,7 +15,6 @@ class SimpleKicker(Player):
             self.strategy = GoToPosition(self.behindTheBall())
             self.reachedGoal = False
 
-
         angle_ball_to_player = (self.ball - self.pos).angle
 
         if self.reachedGoal == True:
@@ -33,6 +32,18 @@ class SimpleKicker(Player):
 
     def isInsideConeOfRadiusAndMaxDistance(self, angle_ball_to_player, angle = 30, maxDistance = 0.5):
         return fabs(angle_ball_to_player - self.TargetConeAngle) < angle and fabs(self.pos.distance_to(self.ball)) <= maxDistance
+
+    def goal(self):
+        if self.fieldSide == Side.RIGHT:
+            if (self.strategy.goal.x > 0.5):
+                self.strategy.goal.X = 0.5
+                self.reachedGoal = False
+        else:
+            if (self.strategy.goal.x < -0.5):
+                self.strategy.goal.X = -0.5
+                self.reachedGoal = False
+
+        return self.strategy.get_strategy_output()
 
     @property
     def TargetConeAngle(self):
