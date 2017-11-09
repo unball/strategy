@@ -7,7 +7,7 @@ class GoToBall(AbstractStrategy):
         self.th = 0
         self.tolerance_radius = 0.07
         self.goal = Point(0, 0)
-        self.lim_x = 0.35
+        self.lim_x = 0.40
 
     def get_strategy_output(self):
         return [self.goal.X, self.goal.Y, 0, self.u, 0, 0, 0, self.control_option]
@@ -33,7 +33,7 @@ class GoToBall(AbstractStrategy):
                     self.goal = Point(self.ball_pos.x, self.ball_pos.y)
 
             if self.fieldSide == Side.LEFT:
-                if self.ball_pos.X <= self.lim_x:
+                if self.ball_pos.X <= -self.lim_x:
                     self.goal = Point(-self.lim_x, self.ball_pos.y)
                 else:
                     self.goal = Point(self.ball_pos.x, self.ball_pos.y)                

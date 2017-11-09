@@ -15,6 +15,8 @@ class GoToBall2(AbstractStrategy):
     def calculate_goal(self):
         self.goal = Point(self.ball_pos.x, self.ball_pos.y)
         relative_target=convertTargetPositions(self.ball_pos.x, self.ball_pos.y, self.position.X, self.position.Y, self.th)
+        if self.ball_pos.x > 0.4:
+            self.goal.X = 0.4
         if relative_target[1]>0:
             self.u=0
         if math.sqrt((self.ball_pos.x - self.position.X)**2 + (self.ball_pos.y - self.position.Y)**2) <= self.tolerance_radius:

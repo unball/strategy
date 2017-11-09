@@ -6,7 +6,7 @@ class GoalkeeperLine(AbstractStrategy):
         self.ball_pos = Point(0, 0)
         self.control_option = control_options.pose_line
         self.target_th = math.pi / 2
-        self.end_y = 0.16
+        self.end_y = 0.20
         self.position = Point(0, 0)
         self.goal = Point(0, 0)
         self.tolerance_radius = 0.1
