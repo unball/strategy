@@ -24,10 +24,15 @@ class Goalkeeper(AbstractStrategy):
     def calculate_goal(self):
         if math.sqrt((self.ball_pos.X - self.position.X)**2 + (self.ball_pos.Y - self.position.Y)**2) <= self.tolerance_radius:
             if self.fieldSide == Side.RIGHT:
-                self.u = 3
-
+                if self.ball_pos.Y > 0:
+                    self.u = 4
+                else:
+                    self.u = 3
             if self.fieldSide == Side.LEFT:
-                self.u = 4
+                if self.ball_pos.Y > 0:
+                    self.u = 3
+                else:
+                    self.u = 4
 
         else:
             if self.fieldSide == Side.RIGHT:
