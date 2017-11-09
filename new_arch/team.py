@@ -7,7 +7,7 @@ from Players.SimpleKicker import SimpleKicker
 
 class Team():
     def __init__(self):
-        self.players = [SimpleKicker(), GoalkeeperPlayer(), GoalkeeperPlayer()]
+        self.players = [TestPlayer(), GoalkeeperPlayer(), GoalkeeperPlayer()]
         self.ball = Point(0, 0)
         self.robots_pos_x = []
         self.robots_pos_y = []

@@ -5,7 +5,7 @@ from math import fabs
 class TestPlayer(Player):
     def __init__(self):
         super(TestPlayer, self).__init__()
-        self.strategy = ControlTest()
+        self.strategy = GoToBall()
 
     def updateStrategy(self):
         pass
