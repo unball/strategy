@@ -35,10 +35,18 @@ def assembly_msg(output):
 
 def keyboardListener(data):
     global paused
-    if data.key == 112:
+    print data
+    data.data = data.data.lower()
+    if data.data == 'p':
         paused = True
-    if data.key == 114:
+    if data.data == 'r':
         paused = False
+    if data.data == 'right':
+        FieldSide.side = Side.RIGHT
+    if data.data == 'left':
+        FieldSide.side = Side.LEFT
+
+
 
 def fieldSideListener(field_side):
     if (field_side.data == "Right"):
@@ -58,7 +66,7 @@ def start(team):
     pub = rospy.Publisher('strategy_output_topic', strategy_output_msg, queue_size=1)
     rospy.init_node('strategy')
     rospy.Subscriber('measurement_system_topic', measurement_msg, callback, team)
-    rospy.Subscriber('keyboard_topic', KeyboardMessage, keyboardListener)
+    rospy.Subscriber('keyboard_topic', String, keyboardListener)
     rospy.Subscriber('field_side_topic', String, fieldSideListener)
     rospy.Subscriber('keyboard_event_topic', Char, keyboardEventListener)
     rate = rospy.Rate(30)
