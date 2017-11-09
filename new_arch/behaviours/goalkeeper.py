@@ -12,29 +12,27 @@ class Goalkeeper(AbstractStrategy):
         self.end_y = 0.16
         self.position = Point(0, 0)
         self.goal = Point(0, 0)
-        self.circ_radius = 0.5
-        self.circ_center_x = 1.1
-        self.tolerance_radius = 0.1
+        self.circ_radius = 1
+        self.circ_center_x = 1.3
+        self.tolerance_radius = 0.07
         self.saturatorR = 2.5
         self.saturatorL = math.pi - self.saturatorR
 
     def get_strategy_output(self):
-        if self.is_ball_wall_in_goal_range():
-            return [self.goal.X, self.ball_wall.y, self.target_th, self.u, 0, 0, 0, self.control_option]
         return [self.goal.X, self.goal.Y, self.target_th, self.u, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
         if math.sqrt((self.ball_pos.X - self.position.X)**2 + (self.ball_pos.Y - self.position.Y)**2) <= self.tolerance_radius:
             if self.fieldSide == Side.RIGHT:
                 if self.ball_pos.Y > 0:
-                    self.u = 4
-                else:
                     self.u = 3
+                else:
+                    self.u = 4
             if self.fieldSide == Side.LEFT:
                 if self.ball_pos.Y > 0:
-                    self.u = 3
-                else:
                     self.u = 4
+                else:
+                    self.u = 3
 
         else:
             if self.fieldSide == Side.RIGHT:
@@ -65,15 +63,3 @@ class Goalkeeper(AbstractStrategy):
                 aux_target = Point(self.circ_radius * math.cos(th), self.circ_radius * math.sin(th))
                 self.goal = dislocate(aux_target, -self.circ_center_x)
                 self.u = 0
-
-    def is_ball_wall_in_goal_range(self):
-        print(self.ball_wall)
-        if FieldSide.side == Side.RIGHT:
-            if self.ball_wall.x >= 0.6 and (self.ball_wall.y < 0.7 and self.ball_wall.y > -0.7):
-                print('true')
-                return True
-        else:
-            if self.ball_wall.x <= -0.6 and (self.ball_wall.y < 0.7 and self.ball_wall.y > -0.7):
-                print('true')
-                return True
-        return False

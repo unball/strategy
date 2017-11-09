@@ -21,21 +21,21 @@ class GoalkeeperLine(AbstractStrategy):
         if math.sqrt((self.ball_pos.X - self.position.X)**2 + (self.ball_pos.Y - self.position.Y)**2) <= self.tolerance_radius:
             if self.fieldSide == Side.RIGHT:
                 if self.ball_pos.Y > 0:
-                    self.u = 4
-                else:
                     self.u = 3
+                else:
+                    self.u = 4
 
             if self.fieldSide == Side.LEFT:
                 if self.ball_pos.Y > 0:
-                    self.u = 3
-                else:
                     self.u = 4
+                else:
+                    self.u = 3
 
         else:
             if self.fieldSide == Side.RIGHT:
-                self.goal.X = 0.60
+                self.goal.X = 0.65
             if self.fieldSide == Side.LEFT:
-                self.goal.X = -0.60
+                self.goal.X = -0.65
 
             if self.position.Y <= self.ball_pos.Y <= self.end_y:
                 self.goal.Y = self.ball_pos.Y

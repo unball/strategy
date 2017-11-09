@@ -2,6 +2,7 @@ from point import Point
 from behaviours.circumvent_ball import CircumventBall
 from behaviours.circumvent_ball import Direction
 from behaviours.go_to_ball import *
+from behaviours.go_to_ball2 import *
 from behaviours.go_to_position import *
 from behaviours.go_to_goal import *
 from behaviours.goalkeeper import *

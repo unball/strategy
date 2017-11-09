@@ -1,11 +1,11 @@
 from abstract_strategy import *
 
-class GoToBall(AbstractStrategy):
+class GoToBall2(AbstractStrategy):
     def __init__(self):
         self.ball_pos = Point(0, 0)
-        self.control_option = control_options.pose_line
+        self.control_option = control_options.position
         self.th = 0
-        self.tolerance_radius = 0.07
+        self.tolerance_radius = 0.2
         self.goal = Point(0, 0)
         self.lim_x = 0.35
 
@@ -14,17 +14,7 @@ class GoToBall(AbstractStrategy):
 
     def calculate_goal(self):
         if math.sqrt((self.ball_pos.X - self.position.X)**2 + (self.ball_pos.Y - self.position.Y)**2) <= self.tolerance_radius:
-            if self.fieldSide == Side.RIGHT:
-                if self.ball_pos.Y > 0:
-                    self.u = 3
-                else:
-                    self.u = 4
-
-            if self.fieldSide == Side.LEFT:
-                if self.ball_pos.Y > 0:
-                    self.u = 4
-                else:
-                    self.u = 3
+            self.u=1
         else:
             if self.fieldSide == Side.RIGHT:
                 if self.ball_pos.X >= self.lim_x:
