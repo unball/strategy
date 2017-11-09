@@ -6,6 +6,7 @@ class GoToBall2(AbstractStrategy):
         self.control_option = control_options.position
         self.th = 0
         self.tolerance_radius = 0.2
+        self.minimum_radius = 0.05
         self.goal = Point(0, 0)
         self.lim_x = 0.35
 
@@ -20,7 +21,20 @@ class GoToBall2(AbstractStrategy):
         if relative_target[1]>0:
             self.u=0
         if math.sqrt((self.ball_pos.x - self.position.X)**2 + (self.ball_pos.y - self.position.Y)**2) <= self.tolerance_radius:
-            self.u=1
+            if math.sqrt((self.ball_pos.x - self.position.X)**2 + (self.ball_pos.y - self.position.Y)**2) > self.minimum_radius:
+                self.u=1
+        if math.sqrt((self.ball_pos.x - self.position.X)**2 + (self.ball_pos.y - self.position.Y)**2) <= self.minimum_radius:
+            
+            if self.fieldSide == Side.RIGHT:
+                if self.ball_pos.Y > 0:
+                    self.u = 3
+                else:
+                    self.u = 4
+            if self.fieldSide == Side.LEFT:
+                if self.ball_pos.Y > 0:
+                    self.u = 4
+                else:
+                    self.u = 3
         if relative_target[1]<0:
             self.u=2
 
