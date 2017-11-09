@@ -53,10 +53,11 @@ class GoalkeeperLine(AbstractStrategy):
 
 
     def is_ball_wall_in_goal_range(self):
+        margin_goal=0.4
         if FieldSide.side == Side.RIGHT:
-            if self.ball_wall.x >= 0.6 and (self.ball_wall.y < 0.7 and self.ball_wall.y > -0.7):
+            if self.ball_wall.x >= 0.6 and (self.ball_wall.y < margin_goal and self.ball_wall.y > -margin_goal):
                 return True
         else:
-            if self.ball_wall.x <= -0.6 and (self.ball_wall.y < 0.7 and self.ball_wall.y > -0.7):
+            if self.ball_wall.x <= -0.6 and (self.ball_wall.y < margin_goal and self.ball_wall.y > -margin_goal):
                 return True
         return False
