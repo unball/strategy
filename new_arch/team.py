@@ -2,10 +2,12 @@ from point import Point
 from Players.KickerPlayer import KickerPlayer
 from Players.GoalkeeperPlayer import GoalkeeperPlayer
 from Players.TestPlayer import TestPlayer
+from Players.SquareKicker import SquareKicker
+from Players.SimpleKicker import SimpleKicker
 
 class Team():
     def __init__(self):
-        self.players = [KickerPlayer(), GoalkeeperPlayer(), GoalkeeperPlayer()]
+        self.players = [SimpleKicker(), GoalkeeperPlayer(), GoalkeeperPlayer()]
         self.ball = Point(0, 0)
         self.robots_pos_x = []
         self.robots_pos_y = []
