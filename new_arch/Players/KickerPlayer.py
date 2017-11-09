@@ -9,7 +9,6 @@ class KickerPlayer(Player):
         self.goToGoalStrategy = GoToPosition(self.GoalCenter)
         self.strategy = self.circumventStrategy
         self.lockCone = False
-        #self.lockLooking = False
 
     def updateStrategy(self):
         angle_ball_to_player = (self.ball - self.pos).angle
@@ -20,7 +19,6 @@ class KickerPlayer(Player):
                     self.lockCone = True
                 else:
                     self.strategy = LookToTarget(self.ball)
-                    #self.lockLooking = True
             elif fabs(self.ball.distance_to(self.pos)) <= 0.5:
                 self.circumventStrategy.changeDirection(self.getDirection())
                 self.strategy = self.circumventStrategy
@@ -28,8 +26,6 @@ class KickerPlayer(Player):
                 self.strategy = GoToPosition(self.ball)
         if not self.isInsideConeOfRadiusAndMaxDistance(angle_ball_to_player, 45, 0.3):
             self.lockCone = False
-        #if self.isLooking(tolerance = 30):
-        #    self.lockLooking = False
 
     def isLooking(self, tolerance = 20):
         difference_angle = (self.ball - self.pos).angle*pi/180 - self.th
