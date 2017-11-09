@@ -13,19 +13,26 @@ class GoToBall2(AbstractStrategy):
         return [self.goal.X, self.goal.Y, 0, self.u, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
-        if math.sqrt((self.ball_pos.X - self.position.X)**2 + (self.ball_pos.Y - self.position.Y)**2) <= self.tolerance_radius:
+        self.goal = Point(self.ball_pos.x, self.ball_pos.y)
+        relative_target=convertTargetPositions(self.ball_pos.x, self.ball_pos.y, self.position.X, self.position.Y, self.th)
+        if relative_target[1]>0:
+            self.u=0
+        if math.sqrt((self.ball_pos.x - self.position.X)**2 + (self.ball_pos.y - self.position.Y)**2) <= self.tolerance_radius:
             self.u=1
-        else:
-            if self.fieldSide == Side.RIGHT:
-                if self.ball_pos.X >= self.lim_x:
-                    self.goal = Point(self.lim_x, self.ball_pos.y)
-                else:
-                    self.goal = Point(self.ball_pos.x, self.ball_pos.y)
+        if relative_target[1]<0:
+            self.u=2
 
-            if self.fieldSide == Side.LEFT:
-                if self.ball_pos.X <= self.lim_x:
-                    self.goal = Point(-self.lim_x, self.ball_pos.y)
-                else:
-                    self.goal = Point(self.ball_pos.x, self.ball_pos.y)                
+def convertTargetPositions(target_x, target_y, robot_x, robot_y, robot_th):
+    relative_target = [target_x - robot_x, target_y - robot_y]
+    relative_target = convert_axis_to_robot(relative_target, robot_th)
+    return relative_target
 
-            self.u = 0
+def convert_axis_to_robot(vector, th):
+    #Receive angle in radians
+    ax = vector[0]
+    ay = vector[1]
+
+    y = ax*math.cos(th) + ay*math.sin(th)
+    x = ax*math.sin(th) - ay*math.cos(th)
+
+    return [x,y]
