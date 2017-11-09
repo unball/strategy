@@ -11,8 +11,9 @@ class AbstractStrategy():
         self.th = robot_th
         self.id = robot_id
 
-    def set_ball_position(self, ball_pos):
+    def set_ball_position(self, ball_pos, ball_wall = None):
         self.ball_pos = ball_pos
+        self.ball_wall = ball_wall
 
     def enemy_state(self, enemy_pos):
         pass

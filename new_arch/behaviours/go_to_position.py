@@ -6,6 +6,7 @@ class GoToPosition(AbstractStrategy):
         self.control_option = control_options.position
         self.x = point.x
         self.y = point.y
+        self.goal = Point(0, 0)
 
     def get_strategy_output(self):
         return [self.goal.x, self.goal.y, 0, 0, 0, 0, 0, self.control_option]

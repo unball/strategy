@@ -38,9 +38,9 @@ class Player(object):
         self.robot_id = robot_id
         self.strategy.set_robot_state(self.pos, th, robot_id)
 
-    def set_ball_state(self, ball):
+    def set_ball_state(self, ball, ball_wall = None):
         self.ball = ball
-        self.strategy.set_ball_position(ball)
+        self.strategy.set_ball_position(ball, ball_wall)
 
     def play(self):
         self.updateStrategy()

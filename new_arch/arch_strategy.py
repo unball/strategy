@@ -18,7 +18,7 @@ paused = False
 
 def callback(data, team):
     ball = Point(data.ball_x, data.ball_y)
-    team.set_params(ball, data.x, data.y, data.th)
+    team.set_params(ball, data.x, data.y, data.th, data.ball_x_walls, data.ball_y_walls)
 
 def assembly_msg(output):
     aux = strategy_output_msg()

@@ -18,18 +18,20 @@ class Team():
         self.vy = []
         self.strategy_output = []
 
-    def set_params(self, ball, robots_pos_x, robots_pos_y, robots_th):
+    def set_params(self, ball, robots_pos_x, robots_pos_y, robots_th, ball_x_wall, ball_y_wall):
         self.robots_pos_x = robots_pos_x
         self.robots_pos_y = robots_pos_y
         self.robots_th = robots_th
         self.ball = ball
+        self.ball_x_wall = ball_x_wall
+        self.ball_y_wall = ball_y_wall
 
     def run(self):
         for player, pos_x, pos_y, th in zip(self.players, self.robots_pos_x,
                                             self.robots_pos_y, self.robots_th):
             robot_id = self.players.index(player)
             player.set_own_state(pos_x, pos_y, th, robot_id)
-            player.set_ball_state(self.ball)
+            player.set_ball_state(self.ball, Point(ball_x_wall, ball_y_wall))
 
         for player in self.players:
             player.play()

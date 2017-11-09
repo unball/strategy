@@ -26,6 +26,15 @@ class SimpleKicker(Player):
             self.reachedGoal = False
             self.strategy = GoToPosition(self.behindTheBall())
 
+        #if self.isOutOfBounds():
+        #    self.strategy = GoToPosition(self.ball)
+        #    self.reachedGoal = False
+
+
+    def isOutOfBounds(self):
+        goal = self.strategy.goal
+        if goal.y >= 0.6 or goal.y < -0.6:
+            return True
 
     def behindTheBall(self):
         return self.ball - Point.polar(self.TargetConeAngle, 0.25)
