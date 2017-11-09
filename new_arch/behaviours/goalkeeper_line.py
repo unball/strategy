@@ -12,14 +12,21 @@ class GoalkeeperLine(AbstractStrategy):
         self.tolerance_radius = 0.1
 
     def get_strategy_output(self):
-        return [self.goal.X, self.goal.Y, self.target_th, 0, 0, 0, 0, self.control_option]
+        return [self.goal.X, self.goal.Y, self.target_th, self.u, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
         if math.sqrt((self.ball_pos.X - self.position.X)**2 + (self.ball_pos.Y - self.position.Y)**2) <= self.tolerance_radius:
             if self.fieldSide == Side.RIGHT:
-                self.u = 3
+                if self.ball_pos.Y > 0:
+                    self.u = 4
+                else:
+                    self.u = 3
+
             if self.fieldSide == Side.LEFT:
-                self.u = 4
+                if self.ball_pos.Y > 0:
+                    self.u = 3
+                else:
+                    self.u = 4
 
         else:
             if self.fieldSide == Side.RIGHT:
@@ -38,3 +45,5 @@ class GoalkeeperLine(AbstractStrategy):
 
             if self.ball_pos.Y < (-1) * self.end_y:
                 self.goal.Y = (-1) * self.end_y
+                
+            self.u = 0
