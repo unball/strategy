@@ -20,9 +20,9 @@ class Goalkeeper(AbstractStrategy):
         self.saturatorL = math.pi - self.saturatorR
 
     def get_strategy_output(self):
-        if self.is_ball_wall_in_goal_range():
-            return [self.goal.X, self.goal.Y, self.target_th, self.u, 0, 0, 0, self.control_option]
-        return [self.goal.X, self.ball_wall.y, self.target_th, self.u, 0, 0, 0, self.control_option]
+        #if self.is_ball_wall_in_goal_range():
+            #return [self.goal.X, self.ball_wall.y, self.target_th, self.u, 0, 0, 0, self.control_option]
+        return [self.goal.X, self.goal.y, self.target_th, self.u, 0, 0, 0, self.control_option]
 
     def calculate_goal(self):
         if math.sqrt((self.ball_pos.X - self.position.X)**2 + (self.ball_pos.Y - self.position.Y)**2) <= self.tolerance_radius:
