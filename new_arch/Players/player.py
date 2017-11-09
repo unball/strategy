@@ -8,6 +8,7 @@ from behaviours.goalkeeper import *
 from behaviours.control_test import *
 from behaviours.SquareCircumventBehaviour import *
 from behaviours.look_to_target import *
+from behaviours.goalkeeper_line import *
 from field_side import *
 
 class Player(object):
